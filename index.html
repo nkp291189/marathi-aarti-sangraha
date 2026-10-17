@@ -1,484 +1,329 @@
 <!DOCTYPE html>
+
 <html lang="mr">
+
 <head>
+
 <meta charset="utf-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>आरती संग्रह</title>
+
+<script>try{var __t=localStorage.getItem('aarti-theme');if(__t==='light'||__t==='dark'){document.documentElement.setAttribute('data-theme',__t);}}catch(e){}</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
+
 :root{
+
   --bg:#fffaf0; --paper:#fffdf7; --ink:#2b1a12; --muted:#7a5a47;
+
   --accent:#9c2f12; --gold:#c18a1b; --rule:#e6d3a8; --tint:#fff1d6;
+
   color-scheme: light dark;
+
 }
+
+:root[data-theme="light"]{ color-scheme: light; }
+
 @media (prefers-color-scheme: dark){
-  :root{ --bg:#17100c; --paper:#1f1611; --ink:#f4e6d0; --muted:#c3a88c;
-         --accent:#f0a36b; --gold:#e0b04a; --rule:#4a3626; --tint:#2a1d14; }
+
+  :root:not([data-theme="light"]){
+
+    --bg:#17100c; --paper:#1f1611; --ink:#f4e6d0; --muted:#c3a88c;
+
+    --accent:#f0a36b; --gold:#e0b04a; --rule:#4a3626; --tint:#2a1d14;
+
+    color-scheme: dark;
+
+  }
+
 }
+
+:root[data-theme="dark"]{
+
+  --bg:#17100c; --paper:#1f1611; --ink:#f4e6d0; --muted:#c3a88c;
+
+  --accent:#f0a36b; --gold:#e0b04a; --rule:#4a3626; --tint:#2a1d14;
+
+  color-scheme: dark;
+
+}
+
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+
 body{
+
   margin:0; background:var(--bg); color:var(--ink);
+
   font-family:"Noto Serif Devanagari","Kohinoor Devanagari","Nirmala UI","Mangal","Mukta","FreeSerif",serif;
+
   font-size:19px; line-height:1.9;
+
 }
+
 .wrap{max-width:680px; margin:0 auto; padding:0 20px 60px}
+
 .cover{text-align:center; padding:72px 0 40px; border-bottom:1px solid var(--rule)}
+
 .om{font-size:64px; color:var(--gold); line-height:1}
+
 .cover h1{font-size:46px; margin:14px 0 6px; color:var(--accent); font-weight:700; line-height:1.3}
+
 .cover .sub{color:var(--muted); font-size:17px; margin:0}
+
 .toc{list-style:none; margin:28px 0 0; padding:0}
-.toc li{border-bottom:1px dotted var(--rule)}
-.toc a{display:grid; grid-template-columns:2.2em 1fr; column-gap:6px; padding:10px 4px; color:inherit; text-decoration:none}
+
+.toc li{border-bottom:1px dotted var(--rule); display:flex; align-items:center}
+
+.toc li a{flex:1; min-width:0; display:grid; grid-template-columns:2.2em 1fr; column-gap:6px; padding:10px 4px; color:inherit; text-decoration:none}
+
 .toc .num{color:var(--gold); grid-row:1 / span 2; font-weight:600}
+
 .toc .t{font-weight:600; line-height:1.5}
+
 .toc .d{color:var(--muted); font-size:15px; line-height:1.4}
+
 .toc-title{margin:36px 0 0; text-align:center; color:var(--muted); font-size:15px; letter-spacing:.08em}
+
 .aarti{padding-top:48px; margin-top:40px; border-top:1px solid var(--rule)}
+
 .deity{text-align:center; color:var(--muted); font-size:16px; margin:0}
+
 h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; margin:4px 0 2px; font-weight:700}
+
 .credit{text-align:center; color:var(--muted); font-size:15px; margin:0}
+
 .orn{text-align:center; color:var(--gold); margin:12px 0 18px; font-size:18px}
+
 .orn span::before,.orn span::after{content:""; display:inline-block; width:64px; height:1px; background:var(--rule); vertical-align:middle; margin:0 12px}
+
 .stanza,.refrain{display:block; text-align:center; margin:0 auto 6px; break-inside:avoid; page-break-inside:avoid}
+
 .stanza .ln,.refrain .ln{display:block}
+
 .refrain{background:var(--tint); border-radius:12px; padding:10px 14px; margin:12px auto; font-weight:600; color:var(--accent)}
+
 .refrain .tag{display:block; font-size:13px; color:var(--gold); font-weight:600; line-height:1.2; margin-bottom:2px}
+
 .short{text-align:center; color:var(--muted); font-size:16px; margin:2px 0 14px}
+
 .stanza{margin-top:14px}
+
 .totop{display:block; text-align:right; font-size:14px; color:var(--accent); text-decoration:none; margin:-30px 0 8px}
+
 .fab{position:fixed; right:14px; bottom:14px; width:44px; height:44px; border-radius:50%; background:var(--accent); color:var(--bg); text-decoration:none; display:flex; align-items:center; justify-content:center; font-size:22px; box-shadow:0 2px 8px rgba(0,0,0,.3); line-height:1}
-html{scroll-behavior:smooth}
-.ctrl{display:none; gap:8px; justify-content:center; flex-wrap:wrap; margin:14px 0 4px}
-.js .ctrl{display:flex}
-.ctrl button{font:inherit; font-size:15px; padding:6px 14px; border-radius:999px; border:1px solid var(--rule); background:var(--tint); color:var(--accent); cursor:pointer}
-.ctrl button.on{background:var(--accent); color:var(--bg); border-color:var(--accent)}
-.hint{display:none; text-align:center; color:var(--muted); font-size:14px; line-height:1.6; margin:6px 0 0}
-.reorder .hint{display:block}
-.toc li{display:flex; align-items:center}
-.toc li a{flex:1; min-width:0}
-.mv{display:none; gap:4px; padding-left:6px}
-.reorder .mv{display:flex}
-.mv button{font:inherit; width:36px; height:36px; border-radius:8px; border:1px solid var(--rule); background:var(--paper); color:var(--accent); cursor:pointer; font-size:15px}
-.reorder .toc li{cursor:grab}
-.toc li.dragging{opacity:.4}
-.toc li.over{box-shadow:0 -2px 0 var(--accent)}
+
 .colophon{margin-top:56px; padding-top:18px; border-top:1px solid var(--rule); text-align:center; color:var(--muted); font-size:14px; line-height:1.7}
+
+/* language: Marathi (default) / English transliteration / both */
+
+.rm{display:none; font-family:Georgia,"Times New Roman",Times,serif}
+
+.m-en .dv{display:none}
+
+.m-en .rm,.m-both .rm{display:block}
+
+.m-en .rm{font-size:.95em}
+
+.m-both .rm{font-size:.74em; font-style:italic; font-weight:400; color:var(--muted); line-height:1.5; margin-bottom:3px}
+
+.m-both .refrain .rm{color:var(--accent); opacity:.85}
+
+.totop .rm,.m-both .totop .rm{display:none}
+
+.m-en .totop .rm{display:inline}
+
+/* controls */
+
+.ctrl{display:none; gap:8px; justify-content:center; flex-wrap:wrap; margin:14px 0 4px}
+
+.js .ctrl{display:flex}
+
+.ctrl button{font:inherit; font-size:15px; padding:6px 14px; border-radius:999px; border:1px solid var(--rule); background:var(--tint); color:var(--accent); cursor:pointer}
+
+.ctrl button.on{background:var(--accent); color:var(--bg); border-color:var(--accent)}
+
+.hint{display:none; text-align:center; color:var(--muted); font-size:14px; line-height:1.6; margin:6px 0 0}
+
+.reorder .hint{display:block}
+
+.mv{display:none; gap:4px; padding-left:6px}
+
+.reorder .mv{display:flex}
+
+.mv button{font:inherit; width:36px; height:36px; border-radius:8px; border:1px solid var(--rule); background:var(--paper); color:var(--accent); cursor:pointer; font-size:15px}
+
+.reorder .toc li{cursor:grab}
+
+.toc li.dragging{opacity:.4}
+
 @page{ size:A4; margin:12mm 14mm 12mm }
+
 @media print{
-  body{background:#fff; color:#2b1a12; font-size:12.5pt; line-height:1.62}
-  :root{--paper:#fff;--tint:#fff1d6;--rule:#e6d3a8;--muted:#7a5a47;--accent:#9c2f12;--gold:#c18a1b}
+
+  body{--bg:#fff; --paper:#fff; --ink:#2b1a12; --muted:#7a5a47; --accent:#9c2f12; --gold:#c18a1b; --rule:#e6d3a8; --tint:#fff1d6;
+
+       background:#fff; color:#2b1a12; font-size:12.5pt; line-height:1.62}
+
   .wrap{max-width:none; padding:0}
-  .cover{padding:12mm 0 8mm; border:0; page-break-after:always}
-  .om{font-size:44pt}
-  .cover h1{font-size:32pt; margin:6px 0 4px}
-  .toc{margin-top:10px}
-  .toc a{padding:2px 4px}
-  .toc .t{font-size:11pt; line-height:1.3}
-  .toc .d{font-size:9pt; line-height:1.2}
-  .aarti.flow{page-break-before:auto; margin-top:10mm}
-  .cover{padding-top:6mm}
-  h2{font-size:22pt}
-  .stanza{margin-top:7px}
-  .refrain{margin:7px auto; padding:7px 12px}
-  .short{margin:0 0 7px}
+
+  .cover{padding:6mm 0 8mm; border:0; page-break-after:always}
+
+  .om{font-size:34pt}
+
+  .cover h1{font-size:26pt; margin:2px 0 2px}
+
+  .cover .sub{font-size:10.5pt}
+
+  .toc-title{margin:8px 0 0}
+
+  .toc{margin-top:4px}
+
+  .toc li{break-inside:avoid}
+
+  .toc li a{padding:1px 4px; color:#2b1a12}
+
+  .toc .t{font-size:10.5pt; line-height:1.25}
+
+  .toc .d{font-size:8.5pt; line-height:1.15}
+
   .aarti{page-break-before:always; margin:0; padding-top:0; border:0}
-  .toc a{color:#2b1a12}
+
+  .aarti.flow{page-break-before:auto; margin-top:10mm}
+
+  h2{font-size:22pt}
+
+  .stanza{margin-top:7px}
+
+  .refrain{margin:7px auto; padding:7px 12px}
+
+  .short{margin:0 0 7px}
+
   .colophon{break-inside:avoid}
+
   .fab,.ctrl,.hint,.mv{display:none !important}
+
   .totop{font-size:9pt; margin:0 0 2mm}
+
 }
+
 </style>
+
 </head>
+
 <body>
+
 <div class="wrap">
+
 <header class="cover" id="top">
+
   <div class="om">ॐ</div>
-  <h1>आरती संग्रह</h1>
-  <p class="sub">निवडक आरत्या, प्रार्थना व मंत्रपुष्पांजली</p>
-  <p class="toc-title">अनुक्रमणिका</p>
+
+  <h1><span class="dv">आरती संग्रह</span><span class="rm">Aarti Sangraha</span></h1>
+
+  <p class="sub"><span class="dv">निवडक आरत्या, प्रार्थना व मंत्रपुषांजली</span><span class="rm">Selected aartis, prayers and Mantra Pushpanjali</span></p>
+
+  <p class="toc-title"><span class="dv">अनुक्रमणिका</span><span class="rm">Index</span></p>
+
   <div class="ctrl">
+
     <button type="button" id="reorderBtn">⇅ क्रम बदला</button>
+
     <button type="button" id="resetBtn">मूळ क्रम</button>
+
     <button type="button" id="saveBtn">⬇ माझ्या क्रमासह HTML जतन करा</button>
+
     <button type="button" id="printBtn">छापा / PDF</button>
+
+    <button type="button" id="themeBtn">◐ थीम: स्वयंचलित</button>
+
+    <button type="button" id="langBtn">अ/A भाषा: मराठी</button>
+
   </div>
-  <noscript><p class="hint" style="display:block">क्रम बदलणे व छापणे यासाठी ही फाईल Chrome किंवा Safari ब्राउझरमध्ये उघडा.</p></noscript>
+
+  <noscript><p class="hint" style="display:block">क्रम बदलणे, भाषा/थीम बदलणे व छापणे यासाठी ही फाईल Chrome किंवा Safari ब्राउझरमध्ये उघडा. / Open this file in Chrome or Safari for reordering, language, theme and print options.</p></noscript>
+
   <p class="hint" id="hint">▲▼ दाबा किंवा नावे ओढून क्रम बदला. नंतर “माझ्या क्रमासह HTML जतन करा” दाबून ती फाईल इतरांना पाठवा.</p>
-  <ol class="toc"><li data-id="sukhakarta"><a href="#sukhakarta"><span class="num">१.</span><span class="t">सुखकर्ता दुःखहर्ता</span><span class="d">श्री गणपतीची आरती</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li><li data-id="durge"><a href="#durge"><span class="num">२.</span><span class="t">दुर्गे दुर्घट भारी</span><span class="d">श्री दुर्गादेवीची आरती</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li><li data-id="lavthavti"><a href="#lavthavti"><span class="num">३.</span><span class="t">लवथवती विक्राळा</span><span class="d">श्री शंकराची आरती</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li><li data-id="mahalakshmi"><a href="#mahalakshmi"><span class="num">४.</span><span class="t">जय देवी जय देवी जय महालक्ष्मी</span><span class="d">श्री महालक्ष्मीची आरती</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li><li data-id="renuka"><a href="#renuka"><span class="num">५.</span><span class="t">जय जय जगदंबे श्री अंबे</span><span class="d">श्री रेणुका मातेची आरती</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li><li data-id="navratri"><a href="#navratri"><span class="num">६.</span><span class="t">अश्विनशुद्धपक्षी अंबा बैसली</span><span class="d">नवरात्र — श्री अंबाबाईची आरती</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li><li data-id="gajanan"><a href="#gajanan"><span class="num">७.</span><span class="t">जय जय सत्चित्स्वरूपा स्वामी गणराया</span><span class="d">श्री गजानन महाराजांची आरती</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li><li data-id="pandurang"><a href="#pandurang"><span class="num">८.</span><span class="t">युगे अठ्ठावीस विटेवरी उभा</span><span class="d">श्री पांडुरंगाची आरती</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li><li data-id="vitthal"><a href="#vitthal"><span class="num">९.</span><span class="t">येई हो विठ्ठले माझे माउली ये</span><span class="d">श्री विठ्ठलाची आरती</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li><li data-id="shendur"><a href="#shendur"><span class="num">१०.</span><span class="t">शेंदूर लाल चढायो</span><span class="d">श्री गणरायाची आरती</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li><li data-id="tusukhakarta"><a href="#tusukhakarta"><span class="num">११.</span><span class="t">तू सुखकर्ता तू दुःखहर्ता</span><span class="d">श्री गणपतीचे भक्तिगीत</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li><li data-id="dashavatar"><a href="#dashavatar"><span class="num">१२.</span><span class="t">आरती सप्रेम जय जय विठ्ठल परब्रह्म</span><span class="d">श्री दशावतारांची आरती</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li><li data-id="hanuman"><a href="#hanuman"><span class="num">१३.</span><span class="t">सत्राणे उड्डाणे हुंकार वदनी</span><span class="d">श्री हनुमंताची आरती</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li><li data-id="datta"><a href="#datta"><span class="num">१४.</span><span class="t">त्रिगुणात्मक त्रैमूर्ती दत्त हा जाणा</span><span class="d">श्री दत्ताची आरती</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li><li data-id="dnyanraj"><a href="#dnyanraj"><span class="num">१५.</span><span class="t">आरती ज्ञानराजा महाकैवल्यतेजा</span><span class="d">श्री ज्ञानदेवांची आरती</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li><li data-id="ghalin"><a href="#ghalin"><span class="num">१६.</span><span class="t">घालीन लोटांगण</span><span class="d">प्रार्थना</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li><li data-id="karpoor"><a href="#karpoor"><span class="num">१७.</span><span class="t">कर्पूरगौरं करुणावतारं</span><span class="d">कर्पूरारती</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li><li data-id="pushpanjali"><a href="#pushpanjali"><span class="num">१८.</span><span class="t">मंत्रपुष्पांजली</span><span class="d">आरतीनंतर</span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li></ol>
+
+  <ol class="toc"><li data-id="sukhakarta"><a href="#sukhakarta"><span class="num">१.</span><span class="t"><span class="dv">सुखकर्ता दुःखहर्ता</span><span class="rm">Sukhakarta Dukhaharta</span></span><span class="d"><span class="dv">श्री गणपतीची आरती</span><span class="rm">Shri Ganapatichi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा / Move up">▲</button><button type="button" class="down" aria-label="खाली हलवा / Move down">▼</button></span></li><li data-id="durge"><a href="#durge"><span class="num">२.</span><span class="t"><span class="dv">दुर्गे दुर्घट भारी</span><span class="rm">Durge Durghat Bhari</span></span><span class="d"><span class="dv">श्री दुर्गादेवीची आरती</span><span class="rm">Shri Durgadevichi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा / Move up">▲</button><button type="button" class="down" aria-label="खाली हलवा / Move down">▼</button></span></li><li data-id="lavthavti"><a href="#lavthavti"><span class="num">३.</span><span class="t"><span class="dv">लवथवती विक्राळा</span><span class="rm">Lavathavati Vikrala</span></span><span class="d"><span class="dv">श्री शंकराची आरती</span><span class="rm">Shri Shankarachi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा / Move up">▲</button><button type="button" class="down" aria-label="खाली हलवा / Move down">▼</button></span></li><li data-id="mahalakshmi"><a href="#mahalakshmi"><span class="num">४.</span><span class="t"><span class="dv">जय देवी जय देवी जय महालक्ष्मी</span><span class="rm">Jay Devi Jay Devi Jay Mahalakshmi</span></span><span class="d"><span class="dv">श्री महालक्ष्मीची आरती</span><span class="rm">Shri Mahalakshmichi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा / Move up">▲</button><button type="button" class="down" aria-label="खाली हलवा / Move down">▼</button></span></li><li data-id="renuka"><a href="#renuka"><span class="num">५.</span><span class="t"><span class="dv">जय जय जगदंबे श्री अंबे</span><span class="rm">Jay Jay Jagadambe Shri Ambe</span></span><span class="d"><span class="dv">श्री रेणुका मातेची आरती</span><span class="rm">Shri Renuka Matechi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा / Move up">▲</button><button type="button" class="down" aria-label="खाली हलवा / Move down">▼</button></span></li><li data-id="navratri"><a href="#navratri"><span class="num">६.</span><span class="t"><span class="dv">अश्विनशुद्धपक्षी अंबा बैसली</span><span class="rm">Ashvinashuddhapakshi Amba Baisali</span></span><span class="d"><span class="dv">नवरात्र — श्री अंबाबाईची आरती</span><span class="rm">Navaratr — Shri Ambabaichi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा / Move up">▲</button><button type="button" class="down" aria-label="खाली हलवा / Move down">▼</button></span></li><li data-id="gajanan"><a href="#gajanan"><span class="num">७.</span><span class="t"><span class="dv">जय जय सत्चित्स्वरूपा स्वामी गणराया</span><span class="rm">Jay Jay Satchitsvarupa Svami Ganaraya</span></span><span class="d"><span class="dv">श्री गजानन महाराजांची आरती</span><span class="rm">Shri Gajanan Maharajanchi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा / Move up">▲</button><button type="button" class="down" aria-label="खाली हलवा / Move down">▼</button></span></li><li data-id="pandurang"><a href="#pandurang"><span class="num">८.</span><span class="t"><span class="dv">युगे अठ्ठावीस विटेवरी उभा</span><span class="rm">Yuge Aththavis Vitevari Ubha</span></span><span class="d"><span class="dv">श्री पांडुरंगाची आरती</span><span class="rm">Shri Pandurangachi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा / Move up">▲</button><button type="button" class="down" aria-label="खाली हलवा / Move down">▼</button></span></li><li data-id="vitthal"><a href="#vitthal"><span class="num">९.</span><span class="t"><span class="dv">येई हो विठ्ठले माझे माउली ये</span><span class="rm">Yei Ho Viththale Majhe Mauli Ye</span></span><span class="d"><span class="dv">श्री विठ्ठलाची आरती</span><span class="rm">Shri Viththalachi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा / Move up">▲</button><button type="button" class="down" aria-label="खाली हलवा / Move down">▼</button></span></li><li data-id="shendur"><a href="#shendur"><span class="num">१०.</span><span class="t"><span class="dv">शेंदूर लाल चढायो</span><span class="rm">Shendur Lal Chadhayo</span></span><span class="d"><span class="dv">श्री गणरायाची आरती</span><span class="rm">Shri Ganarayachi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा / Move up">▲</button><button type="button" class="down" aria-label="खाली हलवा / Move down">▼</button></span></li><li data-id="tusukhakarta"><a href="#tusukhakarta"><span class="num">११.</span><span class="t"><span class="dv">तू सुखकर्ता तू दुःखहर्ता</span><span class="rm">Tu Sukhakarta Tu Dukhaharta</span></span><span class="d"><span class="dv">श्री गणपतीची आरती</span><span class="rm">Shri Ganapatichi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा / Move up">▲</button><button type="button" class="down" aria-label="खाली हलवा / Move down">▼</button></span></li><li data-id="dashavatar"><a href="#dashavatar"><span class="num">१२.</span><span class="t"><span class="dv">आरती सप्रेम जय जय विठ्ठल परब्रह्म</span><span class="rm">Aarati Saprem Jay Jay Viththal Parabrahm</span></span><span class="d"><span class="dv">श्री दशावतारांची आरती</span><span class="rm">Shri Dashavataranchi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="Move up">▲</button><button type="button" class="down" aria-label="Move down">▼</button></span></li><li data-id="hanuman"><a href="#hanuman"><span class="num">१३.</span><span class="t"><span class="dv">सत्राणे उड्डाणे हुंकार वदनी</span><span class="rm">Satrane Uddane Hunkar Vadani</span></span><span class="d"><span class="dv">श्री हनुमंताची आरती</span><span class="rm">Shri Hanumantachi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा / Move up">▲</button><button type="button" class="down" aria-label="खाली हलवा / Move down">▼</button></span></li><li data-id="datta"><a href="#datta"><span class="num">१४.</span><span class="t"><span class="dv">त्रिगुणात्मक त्रैमूर्ती दत्त हा जाणा</span><span class="rm">Trigunatmak Traimurti Datt Ha Jana</span></span><span class="d"><span class="dv">श्री दत्ताची आरती</span><span class="rm">Shri Dattachi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा / Move up">▲</button><button type="button" class="down" aria-label="खाली हलवा / Move down">▼</button></span></li><li data-id="dnyanraj"><a href="#dnyanraj"><span class="num">१५.</span><span class="t"><span class="dv">आरती ज्ञानराजा महाकैवल्यतेजा</span><span class="rm">Aarati Dnyanaraja Mahakaivalyateja</span></span><span class="d"><span class="dv">श्री ज्ञानदेवांची आरती</span><span class="rm">Shri Dnyanadevanchi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा / Move up">▲</button><button type="button" class="down" aria-label="खाली हलवा / Move down">▼</button></span></li><li data-id="karpoor"><a href="#karpoor"><span class="num">१६.</span><span class="t"><span class="dv">कर्पूरगौरं करुणावतारं (शिवस्तुतीसह)</span><span class="rm">Karpuragauram Karunavataram (with Shivastuti)</span></span><span class="d"><span class="dv">कर्पूरारती व शिवस्तुती</span><span class="rm">Karpurarati and Shivastuti</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा / Move up">▲</button><button type="button" class="down" aria-label="खाली हलवा / Move down">▼</button></span></li><li data-id="ghalin"><a href="#ghalin"><span class="num">१७.</span><span class="t"><span class="dv">घालीन लोटांगण</span><span class="rm">Ghalin Lotangan</span></span><span class="d"><span class="dv">प्रार्थना</span><span class="rm">Prarthana</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा / Move up">▲</button><button type="button" class="down" aria-label="खाली हलवा / Move down">▼</button></span></li><li data-id="pushpanjali"><a href="#pushpanjali"><span class="num">१८.</span><span class="t"><span class="dv">मंत्रपुष्पांजली</span><span class="rm">Mantrapushpanjali</span></span><span class="d"><span class="dv">आरतीनंतर</span><span class="rm">Aaratinantar</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा / Move up">▲</button><button type="button" class="down" aria-label="खाली हलवा / Move down">▼</button></span></li></ol>
+
 </header>
+
 <section class="aarti" id="sukhakarta">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">श्री गणपतीची आरती</p>
-<h2>सुखकर्ता दुःखहर्ता</h2>
-<p class="credit">रचना : समर्थ रामदास स्वामी</p>
+
+<a class="totop" href="#top"><span class="dv">↑ अनुक्रमणिका</span><span class="rm">↑ Index</span></a>
+
+<p class="deity"><span class="dv">श्री गणपतीची आरती</span><span class="rm">Shri Ganapatichi Aarati</span></p>
+
+<h2><span class="dv">सुखकर्ता दुःखहर्ता</span><span class="rm">Sukhakarta Dukhaharta</span></h2>
+
+<p class="credit"><span class="dv">रचना : समर्थ रामदास स्वामी</span><span class="rm">Rachana : Samarth Ramadas Svami</span></p>
+
 <div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="stanza"><span class="ln">सुखकर्ता दुःखहर्ता वार्ता विघ्नाची ।</span><span class="ln">नुरवी पुरवी प्रेम कृपा जयाची ।</span><span class="ln">सर्वांगी सुंदर उटी शेंदुराची ।</span><span class="ln">कंठी झळके माळ मुक्ताफळांची ॥ १ ॥</span></div>
-<div class="refrain"><span class="tag">धृ.</span><span class="ln">जय देव जय देव जय मंगलमूर्ती ।</span><span class="ln">दर्शनमात्रे मनःकामना पुरती ॥ जय देव जय देव ॥</span></div>
-<div class="stanza"><span class="ln">रत्नखचित फरा तुज गौरीकुमरा ।</span><span class="ln">चंदनाची उटी कुंकुमकेशरा ।</span><span class="ln">हिरेजडित मुकुट शोभतो बरा ।</span><span class="ln">रुणझुणती नूपुरे चरणी घागरिया ॥ २ ॥</span></div>
-<div class="short">॥ जय देव जय देव ॥</div>
-<div class="stanza"><span class="ln">लंबोदर पीतांबर फणिवरबंधना ।</span><span class="ln">सरळ सोंड वक्रतुंड त्रिनयना ।</span><span class="ln">दास रामाचा वाट पाहे सदना ।</span><span class="ln">संकटी पावावे निर्वाणी रक्षावे सुरवरवंदना ॥ ३ ॥</span></div>
-<div class="short">॥ जय देव जय देव ॥</div>
+
+<div class="stanza"><span class="ln"><span class="dv">सुखकर्ता दुःखहर्ता वार्ता विघ्नाची ।</span><span class="rm">Sukhakarta dukhaharta varta vighnachi |</span></span><span class="ln"><span class="dv">नुरवी पुरवी प्रेम कृपा जयाची ।</span><span class="rm">Nuravi puravi prem kripa jayachi |</span></span><span class="ln"><span class="dv">सर्वांगी सुंदर उटी शेंदुराची ।</span><span class="rm">Sarvangi sundar uti shendurachi |</span></span><span class="ln"><span class="dv">कंठी झळके माळ मुक्ताफळांची ॥ १ ॥</span><span class="rm">Kanthi jhalake mal muktaphalanchi || 1 ||</span></span></div>
+
+<div class="refrain"><span class="tag"><span class="dv">धृ.</span><span class="rm">Refrain</span></span><span class="ln"><span class="dv">जय देव जय देव जय मंगलमूर्ती ।</span><span class="rm">Jay dev jay dev jay mangalamurti |</span></span><span class="ln"><span class="dv">दर्शनमात्रे मनःकामना पुरती ॥ जय देव जय देव ॥</span><span class="rm">Darshanamatre manahkamana purati || jay dev jay dev ||</span></span></div>
+
+<div class="stanza"><span class="ln"><span class="dv">रत्नखचित फरा तुज गौरीकुमरा ।</span><span class="rm">Ratnakhachit phara tuj gaurikumara |</span></span><span class="ln"><span class="dv">चंदनाची उटी कुंकुमकेशरा ।</span><span class="rm">Chandanachi uti kunkumakeshara |</span></span><span class="ln"><span class="dv">हिरेजडित मुकुट शोभतो बरा ।</span><span class="rm">Hirejadit mukut shobhato bara |</span></span><span class="ln"><span class="dv">रुणझुणती नूपुरे चरणी घागरिया ॥ २ ॥</span><span class="rm">Runajhunati nupure charani ghagariya || 2 ||</span></span></div>
+
+<div class="short"><span class="dv">॥ जय देव जय देव ॥</span><span class="rm">|| Jay dev jay dev ||</span></div>
+
+<div class="stanza"><span class="ln"><span class="dv">लंबोदर पीतांबर फणिवरबंधना ।</span><span class="rm">Lambodar pitambar phanivarabandhana |</span></span><span class="ln"><span class="dv">सरळ सोंड वक्रतुंड त्रिनयना ।</span><span class="rm">Saral sond vakratund trinayana |</span></span><span class="ln"><span class="dv">दास रामाचा वाट पाहे सदना ।</span><span class="rm">Das ramacha vat pahe sadana |</span></span><span class="ln"><span class="dv">संकटी पावावे निर्वाणी रक्षावे सुरवरवंदना ॥ ३ ॥</span><span class="rm">Sankati pavave nirvani rakshave suravaravandana || 3 ||</span></span></div>
+
+<div class="short"><span class="dv">॥ जय देव जय देव ॥</span><span class="rm">|| Jay dev jay dev ||</span></div>
+
+<div class="stanza"><span class="ln"><span class="dv">चरणींच्या घागरिया रुणझुण वाजती ।</span><span class="rm">Charaninchya ghagariya runajhun vajati |</span></span><span class="ln"><span class="dv">तेणे नादे देव अंबर गर्जती ।</span><span class="rm">Tene nade dev ambar garjati |</span></span><span class="ln"><span class="dv">ताता तिनकत तिनकत नाचे गणपती ।</span><span class="rm">Tata tinakat tinakat nache ganapati |</span></span><span class="ln"><span class="dv">शंकर पार्वती कौतुक पाहती ॥ ४ ॥</span><span class="rm">Shankar parvati kautuk pahati || 4 ||</span></span></div>
+
+<div class="refrain"><span class="tag"><span class="dv">धृ.</span><span class="rm">Refrain</span></span><span class="ln"><span class="dv">जय देव जय देव जय मंगलमूर्ती ।</span><span class="rm">Jay dev jay dev jay mangalamurti |</span></span><span class="ln"><span class="dv">दर्शनमात्रे मनःकामना पुरती ॥ जय देव जय देव ॥</span><span class="rm">Darshanamatre manahkamana purati || jay dev jay dev ||</span></span></div>
+
 </section>
+
 <section class="aarti" id="durge">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">श्री दुर्गादेवीची आरती</p>
-<h2>दुर्गे दुर्घट भारी</h2>
-<p class="credit">नाममुद्रा : नरहरी</p>
+
+<a class="totop" href="#top"><span class="dv">↑ अनुक्रमणिका</span><span class="rm">↑ Index</span></a>
+
+<p class="deity"><span class="dv">श्री दुर्गादेवीची आरती</span><span class="rm">Shri Durgadevichi Aarati</span></p>
+
+<h2><span class="dv">दुर्गे दुर्घट भारी</span><span class="rm">Durge Durghat Bhari</span></h2>
+
+<p class="credit"><span class="dv">नाममुद्रा : नरहरी</span><span class="rm">Namamudra : Narahari</span></p>
+
 <div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="stanza"><span class="ln">दुर्गे दुर्घट भारी तुजविण संसारी ।</span><span class="ln">अनाथनाथे अंबे करुणा विस्तारी ।</span><span class="ln">वारी वारी जन्ममरणांते वारी ।</span><span class="ln">हरी पडलो आता संकट नीवारी ॥ १ ॥</span></div>
-<div class="refrain"><span class="tag">धृ.</span><span class="ln">जय देवी जय देवी महिषासुरमथिनी ।</span><span class="ln">सुरवरईश्वरवरदे तारक संजीवनी ॥ जय देवी जय देवी ॥</span></div>
-<div class="stanza"><span class="ln">त्रिभुवनी भुवनी पाहता तुजऐसी नाही ।</span><span class="ln">चारी श्रमले परंतु न बोलवे काही ।</span><span class="ln">साही विवाद करिता पडले प्रवाही ।</span><span class="ln">ते तू भक्तालागी पावसि लवलाही ॥ २ ॥</span></div>
-<div class="short">॥ जय देवी जय देवी ॥</div>
-<div class="stanza"><span class="ln">प्रसन्नवदने प्रसन्न होसी निजदासा ।</span><span class="ln">क्लेशांपासुनि सोडवि तोडी भवपाशा ।</span><span class="ln">अंबे तुजवाचून कोण पुरवील आशा ।</span><span class="ln">नरहरि तल्लीन झाला पदपंकजलेशा ॥ ३ ॥</span></div>
-<div class="short">॥ जय देवी जय देवी ॥</div>
+
+<div class="stanza"><span class="ln"><span class="dv">दुर्गे दुर्घट भारी तुजविण संसारी ।</span><span class="rm">Durge durghat bhari tujavin sansari |</span></span><span class="ln"><span class="dv">अनाथनाथे अंबे करुणा विस्तारी ।</span><span class="rm">Anathanathe ambe karuna vistari |</span></span><span class="ln"><span class="dv">वारी वारी जन्ममरणांते वारी ।</span><span class="rm">Vari vari janmamaranante vari |</span></span><span class="ln"><span class="dv">हरी पडलो आता संकट नीवारी ॥ १ ॥</span><span class="rm">Hari padalo aata sankat nivari || 1 ||</span></span></div>
+
+<div class="refrain"><span class="tag"><span class="dv">धृ.</span><span class="rm">Refrain</span></span><span class="ln"><span class="dv">जय देवी जय देवी महिषासुरमर्दिनी ।</span><span class="rm">Jay devi jay devi mahishasuramardini |</span></span><span class="ln"><span class="dv">सुरवरईश्वरवरदे तारक संजीवनी ॥ जय देवी जय देवी ॥</span><span class="rm">Suravareshvaravarade tarak sanjivani || jay devi jay devi ||</span></span></div>
+
+<div class="stanza"><span class="ln"><span class="dv">त्रिभुवनी भुवनी पाहता तुजऐसी नाही ।</span><span class="rm">Tribhuvani bhuvani pahata tujaisi nahi |</span></span><span class="ln"><span class="dv">चारी श्रमले परंतु न बोलवे काही ।</span><span class="rm">Chari shramale parantu na bolave kahi |</span></span><span class="ln"><span class="dv">साही विवाद करिता पडले प्रवाही ।</span><span class="rm">Sahi vivad karita padale pravahi |</span></span><span class="ln"><span class="dv">ते तू भक्तालागी पावसि लवलाही ॥ २ ॥</span><span class="rm">Te tu bhaktalagi pavasi lavalahi || 2 ||</span></span></div>
+
+<div class="short"><span class="dv">॥ जय देवी जय देवी ॥</span><span class="rm">|| Jay devi jay devi ||</span></div>
+
+<div class="stanza"><span class="ln"><span class="dv">प्रसन्नवदने प्रसन्न होसी निजदासा ।</span><span class="rm">Prasannavadane prasann hosi nijadasa |</span></span><span class="ln"><span class="dv">क्लेशांपासुनि सोडवि तोडी भवपाशा ।</span><span class="rm">Kleshampasuni sodavi todi bhavapasha |</span></span><span class="ln"><span class="dv">अंबे तुजवाचून कोण पुरवील आशा ।</span><span class="rm">Ambe tujavachun kon puravil aasha |</span></span><span class="ln"><span class="dv">नरहरि तल्लीन झाला पदपंकजलेशा ॥ ३ ॥</span><span class="rm">Narahari tallin jhala padapankajalesha || 3 ||</span></span></div>
+
+<div class="short"><span class="dv">॥ जय देवी जय देवी ॥</span><span class="rm">|| Jay devi jay devi ||</span></div>
+
 </section>
+
 <section class="aarti" id="lavthavti">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">श्री शंकराची आरती</p>
-<h2>लवथवती विक्राळा</h2>
-<p class="credit">रचना : समर्थ रामदास स्वामी</p>
-<div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="stanza"><span class="ln">लवथवती विक्राळा ब्रह्मांडी माळा ।</span><span class="ln">विषे कंठ काळा त्रिनेत्री ज्वाळा ।</span><span class="ln">लावण्यसुंदर मस्तकी बाळा ।</span><span class="ln">तेथुनिया जळ निर्मळ वाहे झुळझुळा ॥ १ ॥</span></div>
-<div class="refrain"><span class="tag">धृ.</span><span class="ln">जय देव जय देव जय श्रीशंकरा ।</span><span class="ln">आरती ओवाळू तुज कर्पूरगौरा ॥ जय देव जय देव ॥</span></div>
-<div class="stanza"><span class="ln">कर्पूरगौरा भोळा नयनी विशाळा ।</span><span class="ln">अर्धांगी पार्वती सुमनांच्या माळा ।</span><span class="ln">विभूतीचे उधळण शितिकंठ नीळा ।</span><span class="ln">ऐसा शंकर शोभे उमावेल्हाळा ॥ २ ॥</span></div>
-<div class="short">॥ जय देव जय देव ॥</div>
-<div class="stanza"><span class="ln">देवीं दैत्यीं सागरमंथन पै केले ।</span><span class="ln">त्यामाजी अवचित हालाहल जे उठले ।</span><span class="ln">ते त्वां असुरपणे प्राशन केले ।</span><span class="ln">नीलकंठ नाम प्रसिद्ध झाले ॥ ३ ॥</span></div>
-<div class="short">॥ जय देव जय देव ॥</div>
-<div class="stanza"><span class="ln">व्याघ्रांबर फणिवरधर सुंदर मदनारी ।</span><span class="ln">पंचानन मनमोहन मुनिजनसुखकारी ।</span><span class="ln">शतकोटींचे बीज वाचे उच्चारी ।</span><span class="ln">रघुकुळटिळक रामदासा अंतरी ॥ ४ ॥</span></div>
-<div class="short">॥ जय देव जय देव ॥</div>
-</section>
-<section class="aarti" id="mahalakshmi">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">श्री महालक्ष्मीची आरती</p>
-<h2>जय देवी जय देवी जय महालक्ष्मी</h2>
-<p class="credit">नाममुद्रा : मुक्तेश्वर</p>
-<div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="refrain"><span class="tag">धृ.</span><span class="ln">जय देवी जय देवी जय महालक्ष्मी ।</span><span class="ln">वससी व्यापकरूपे तू स्थूलसूक्ष्मी ॥</span></div>
-<div class="stanza"><span class="ln">करवीरपुरवासिनी सुरवरमुनिमाता ।</span><span class="ln">पुरहरवरदायिनी मुरहरप्रियकांता ।</span><span class="ln">कमलाकारे जठरी जन्मविला धाता ।</span><span class="ln">सहस्रवदनी भूधर न पुरे गुण गाता ॥ १ ॥</span></div>
-<div class="short">॥ जय देवी जय देवी ॥</div>
-<div class="stanza"><span class="ln">मातुलिंग गदा खेटक रविकिरणी ।</span><span class="ln">झळके हाटकवाटी पीयूषरसपाणी ।</span><span class="ln">माणिकरसना सुरंगवसना मृगनयनी ।</span><span class="ln">शशिकरवदना राजस मदनाची जननी ॥ २ ॥</span></div>
-<div class="short">॥ जय देवी जय देवी ॥</div>
-<div class="stanza"><span class="ln">तारा शक्ति अगम्या शिवभजका गौरी ।</span><span class="ln">सांख्य म्हणती प्रकृती निर्गुण निर्धारी ।</span><span class="ln">गायत्री निजबीजा निगमागम सारी ।</span><span class="ln">प्रगटे पद्मावती निजधर्माचारी ॥ ३ ॥</span></div>
-<div class="short">॥ जय देवी जय देवी ॥</div>
-<div class="stanza"><span class="ln">अमृतभरिते सरिते अघदुरिते वारी ।</span><span class="ln">मारी दुर्घट असुरां भवदुस्तर तारी ।</span><span class="ln">वारी मायापटल प्रणमत परिवारी ।</span><span class="ln">हे रूप चिद्रूप दावी निर्धारी ॥ ४ ॥</span></div>
-<div class="short">॥ जय देवी जय देवी ॥</div>
-<div class="stanza"><span class="ln">चतुराननें कुश्चित कर्मांच्या ओळी ।</span><span class="ln">लिहिल्या असतील माते माझे निजभाळी ।</span><span class="ln">पुसोनि चरणातळी पदसुमने क्षाळी ।</span><span class="ln">मुक्तेश्वर नागर क्षीरसागरबाळी ॥ ५ ॥</span></div>
-<div class="short">॥ जय देवी जय देवी ॥</div>
-</section>
-<section class="aarti" id="renuka">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">श्री रेणुका मातेची आरती</p>
-<h2>जय जय जगदंबे श्री अंबे</h2>
-<p class="credit">नाममुद्रा : विष्णुदास</p>
-<div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="refrain"><span class="tag">धृ.</span><span class="ln">जय जय जगदंबे । श्री अंबे ।</span><span class="ln">रेणुके कल्पकदंबे । जय जय जगदंबे ॥</span></div>
-<div class="stanza"><span class="ln">अनुपम स्वरूपाची तुझी घाटी । अन्य नसे या सृष्टी ।</span><span class="ln">तुज सम रूप दुसरे परमेष्टी । करिता झाला कष्टी ।</span><span class="ln">शशिरस रसरसला वदनपुटी । दिव्य सुलोचन दृष्टी ।</span><span class="ln">सुवर्णरत्नांच्या शिरी मुकुटी । लोपती रविशशिकोटी ।</span><span class="ln">गजमुखी तुज स्तविले हेरंबे । मंगल सकळारंभे ॥ १ ॥</span></div>
-<div class="short">॥ जय जय ॥</div>
-<div class="stanza"><span class="ln">कुमकुमचिरी शोभे मळवटी । कस्तुरीतिलक ललाटी ।</span><span class="ln">नासिक अति सरळ हनुवटी । रुचिरामृतरस ओठी ।</span><span class="ln">समान जणू लवल्या धनुकोटी । आकर्णलोचन भ्रुकुटी ।</span><span class="ln">शिरी नीट भांगवळी उफराटी । कर्नाटकची घाटी ।</span><span class="ln">भुजंग नीळरंगा परी शोभे । वेणी पाठीवर लोंबे ॥ २ ॥</span></div>
-<div class="short">॥ जय जय ॥</div>
-<div class="stanza"><span class="ln">कंकणे कनकाची मनगटी । दिव्य मुद्या दश बोटी ।</span><span class="ln">बाजूबंद जडे बाहुबटी । चर्चुनी केशर उटी ।</span><span class="ln">सुगंधी पुष्पांचे हार कंठी । बहु मोत्यांची दाटी ।</span><span class="ln">अंगी नवी चोळी जरीकाठी । पीत पितांबर तगटी ।</span><span class="ln">पैंजण पदकमळी अति शोभे । भ्रमर धावती लोभे ॥ ३ ॥</span></div>
-<div class="short">॥ जय जय ॥</div>
-<div class="stanza"><span class="ln">साक्षप तू क्षितीच्या तळवटी । तूचि स्वये जगजेठी ।</span><span class="ln">ओवाळीत आरती दीपताटी । घेऊनी कर संपुष्टी ।</span><span class="ln">करुणामृत हृदये संकष्टी । धावसी भक्तांसाठी ।</span><span class="ln">विष्णुदास सदा बहुकष्टी । देशील जरी निजभेटी ।</span><span class="ln">तरी मग काय उणे या लाभे । धाव पाव अविलंबे ॥ ४ ॥</span></div>
-<div class="short">॥ जय जय ॥</div>
-</section>
-<section class="aarti" id="navratri">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">नवरात्र — श्री अंबाबाईची आरती</p>
-<h2>अश्विनशुद्धपक्षी अंबा बैसली</h2>
-<p class="credit">नाममुद्रा : रामदास</p>
-<div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="stanza"><span class="ln">अश्विनशुद्धपक्षी अंबा बैसली सिंहासनी हो ।</span><span class="ln">प्रतिपदेपासून घटस्थापना ती करुनी हो ।</span><span class="ln">मूलमंत्रजप करुनी भोवते रक्षक ठेवुनी हो ।</span><span class="ln">ब्रह्मा विष्णू रुद्र आईचे पूजन करिती हो ॥ १ ॥</span></div>
-<div class="refrain"><span class="tag">धृ.</span><span class="ln">उदो बोला उदो अंबाबाई माऊलीचा हो ।</span><span class="ln">उदोकारे गर्जती काय महिमा वर्णू तिचा हो ॥ उदो उदो ॥</span></div>
-<div class="stanza"><span class="ln">द्वितीयेचे दिवशी मिळती चौसष्ट योगिनी हो ।</span><span class="ln">सकळांमध्ये श्रेष्ठ परशुरामाची जननी हो ।</span><span class="ln">कस्तुरीमळवट भांगी शेंदूर भरुनी हो ।</span><span class="ln">उदोकारे गर्जती सकल चामुंडा मिळुनी हो ॥ २ ॥</span></div>
-<div class="short">॥ उदो उदो ॥</div>
-<div class="stanza"><span class="ln">तृतीयेचे दिवशी अंबे शृंगार मांडिला हो ।</span><span class="ln">मळवट पातळ चोळी कंठी हार मुक्ताफळा हो ।</span><span class="ln">कंठीची पदके कासे पीतांबर पिवळा हो ।</span><span class="ln">अष्टभुजा मिरविती अंबे सुंदर दिसे लीला हो ॥ ३ ॥</span></div>
-<div class="short">॥ उदो उदो ॥</div>
-<div class="stanza"><span class="ln">चतुर्थीचे दिवशी विश्वव्यापक जननी हो ।</span><span class="ln">उपासका पाहसी अंबे प्रसन्न अंतःकरणी हो ।</span><span class="ln">पूर्णकृपे पाहसी जगन्माते मनमोहिनी हो ।</span><span class="ln">भक्तांच्या माऊली सुर ते येती लोटांगणी हो ॥ ४ ॥</span></div>
-<div class="short">॥ उदो उदो ॥</div>
-<div class="stanza"><span class="ln">पंचमीचे दिवशी व्रत ते उपांगललिता हो ।</span><span class="ln">अर्घ्यपाद्यपूजने तुजला भवानी स्तविती हो ।</span><span class="ln">रात्रीचे समयी करिती जागरण हरिकथा हो ।</span><span class="ln">आनंदे प्रेम ते आले सद्भावे क्रीडता हो ॥ ५ ॥</span></div>
-<div class="short">॥ उदो उदो ॥</div>
-<div class="stanza"><span class="ln">षष्ठीचे दिवशी भक्ता आनंद वर्तला हो ।</span><span class="ln">घेउनि दिवट्या हस्ती हर्षे गोंधळ घातला हो ।</span><span class="ln">कवडी एक अर्पिता देसी हार मुक्ताफळा हो ।</span><span class="ln">जोगवा मागता प्रसन्न झाली भक्तकुळा हो ॥ ६ ॥</span></div>
-<div class="short">॥ उदो उदो ॥</div>
-<div class="stanza"><span class="ln">सप्तमीचे दिवशी सप्तशृंगगडावरी हो ।</span><span class="ln">तेथे तू नांदसी भोवती पुष्पे नानापरी हो ।</span><span class="ln">जाईजुईशेवंती पूजा रेखियली बरवी हो ।</span><span class="ln">भक्त संकटी पडता झेलुनि घेसी वरचेवरी हो ॥ ७ ॥</span></div>
-<div class="short">॥ उदो उदो ॥</div>
-<div class="stanza"><span class="ln">अष्टमीचे दिवशी अष्टभुजा नारायणी हो ।</span><span class="ln">सह्याद्रीपर्वती पाहिली उभी जगज्जननी हो ।</span><span class="ln">मन माझे मोहिले शरण आलो तुजलागुनी हो ।</span><span class="ln">स्तनपान देउनि सुखी केले अंतःकरणी हो ॥ ८ ॥</span></div>
-<div class="short">॥ उदो उदो ॥</div>
-<div class="stanza"><span class="ln">नवमीचे दिवशी नवदिवसांचे पारणे हो ।</span><span class="ln">सप्तशतीजप होमहवने सद्भक्ती करुनी हो ।</span><span class="ln">षड्रस अन्ने नैवेद्यासी अर्पियली भोजनी हो ।</span><span class="ln">आचार्यब्राह्मणा तृप्त केले कृपे करुनी हो ॥ ९ ॥</span></div>
-<div class="short">॥ उदो उदो ॥</div>
-<div class="stanza"><span class="ln">दशमीच्या दिवशी अंबा निघे सीमोल्लंघनी हो ।</span><span class="ln">सिंहारूढे दारुण शस्त्रे अंबे त्वां घेउनी हो ।</span><span class="ln">शुंभनिशुंभादिक राक्षसा किती मारिसी रणी हो ।</span><span class="ln">विप्रा रामदासा आश्रय दिधला तो चरणी हो ॥ १० ॥</span></div>
-<div class="short">॥ उदो उदो ॥</div>
-</section>
-<section class="aarti" id="gajanan">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">श्री गजानन महाराजांची आरती</p>
-<h2>जय जय सत्चित्स्वरूपा स्वामी गणराया</h2>
-<p class="credit">नाममुद्रा : दासगणू</p>
-<div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="refrain"><span class="tag">धृ.</span><span class="ln">जय जय सत्चित्स्वरूपा स्वामी गणराया ।</span><span class="ln">अवतरलासी भूवर जड-मूढ ताराया ॥ जयदेव जयदेव ॥</span></div>
-<div class="stanza"><span class="ln">निर्गुण ब्रह्म सनातन अव्यय अविनाशी ।</span><span class="ln">स्थिरचर व्यापुन उरलें जे या जगताशी ।</span><span class="ln">तें तूं तत्त्व खरोखर निःसंशय अससी ।</span><span class="ln">लीलामात्रें धरिलें मानवदेहासी ॥ १ ॥</span></div>
-<div class="short">॥ जयदेव जयदेव ॥</div>
-<div class="stanza"><span class="ln">होऊं न देशी त्याची जाणीव तूं कवणा ।</span><span class="ln">करूनी गणि गण गणांत बोते या भजना ।</span><span class="ln">धाता हरिहर गुरुवर तूंचि सुखसदना ।</span><span class="ln">जिकडे पहावें तिकडे तूं दिससी नयना ॥ २ ॥</span></div>
-<div class="short">॥ जयदेव जयदेव ॥</div>
-<div class="stanza"><span class="ln">लीला अनंत केल्या बंकटसदनास ।</span><span class="ln">पेटविलें त्या अग्नीवांचूनी चिलमेस ।</span><span class="ln">क्षणांत आणिलें जीवन निर्जल वापीस ।</span><span class="ln">केला ब्रह्मगिरीच्या गर्वाचा नाश ॥ ३ ॥</span></div>
-<div class="short">॥ जयदेव जयदेव ॥</div>
-<div class="stanza"><span class="ln">व्याधी वारून केलें कैकां संपन्न ।</span><span class="ln">करविलें भक्तालागी विठ्ठलदर्शन ।</span><span class="ln">भवसिंधु हा तरण्या नौका तव चरण ।</span><span class="ln">स्वामी दासगणूंचे मान्य करा कवन ॥ ४ ॥</span></div>
-<div class="short">॥ जयदेव जयदेव ॥</div>
-</section>
-<section class="aarti" id="pandurang">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">श्री पांडुरंगाची आरती</p>
-<h2>युगे अठ्ठावीस विटेवरी उभा</h2>
-<p class="credit">नाममुद्रा : नामदेव</p>
-<div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="stanza"><span class="ln">युगे अठ्ठावीस विटेवरी उभा ।</span><span class="ln">वामांगी रखुमाई दिसे दिव्य शोभा ।</span><span class="ln">पुंडलिकाचे भेटी परब्रह्म आले गा ।</span><span class="ln">चरणी वाहे भीमा उद्धरी जगा ॥ १ ॥</span></div>
-<div class="refrain"><span class="tag">धृ.</span><span class="ln">जय देव जय देव जय पांडुरंगा ।</span><span class="ln">रखुमाईवल्लभा राईच्या वल्लभा पावे जिवलगा ॥ जय देव जय देव ॥</span></div>
-<div class="stanza"><span class="ln">तुळसीमाळा गळा कर ठेवुनी कटी ।</span><span class="ln">कासे पीतांबर कस्तुरी ललाटी ।</span><span class="ln">देव सुरवर नित्य येती भेटी ।</span><span class="ln">गरुड हनुमंत पुढे उभे राहती ॥ २ ॥</span></div>
-<div class="short">॥ जय देव जय देव ॥</div>
-<div class="stanza"><span class="ln">धन्य वेणुनाद अणुक्षेत्रपाळा ।</span><span class="ln">सुवर्णाची कमळे वनमाळा गळा ।</span><span class="ln">राही रखुमाबाई राणीया सकळा ।</span><span class="ln">ओवाळिती राजा विठोबा सांवळा ॥ ३ ॥</span></div>
-<div class="short">॥ जय देव जय देव ॥</div>
-<div class="stanza"><span class="ln">ओवाळू आरत्या कुरवंड्या येती ।</span><span class="ln">चंद्रभागेमाजी सोडुनिया देती ।</span><span class="ln">दिंड्या पताका वैष्णव नाचती ।</span><span class="ln">पंढरीचा महिमा वर्णावा किती ॥ ४ ॥</span></div>
-<div class="short">॥ जय देव जय देव ॥</div>
-<div class="stanza"><span class="ln">आषाढी कार्तिकी भक्तजन येती ।</span><span class="ln">चंद्रभागेमाजी स्नाने जे करिती ।</span><span class="ln">दर्शनहेळामात्रे तया होय मुक्ती ।</span><span class="ln">केशवासी नामदेव भावे ओवाळिती ॥ ५ ॥</span></div>
-<div class="short">॥ जय देव जय देव ॥</div>
-</section>
-<section class="aarti" id="vitthal">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">श्री विठ्ठलाची आरती</p>
-<h2>येई हो विठ्ठले माझे माउली ये</h2>
-<p class="credit">नाममुद्रा : विष्णुदास नामा</p>
-<div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="refrain"><span class="tag">धृ.</span><span class="ln">येई हो विठ्ठले माझे माउली ये ।</span><span class="ln">निढळावरी कर ठेवुनि वाट मी पाहे ॥</span></div>
-<div class="stanza"><span class="ln">आलिया गेलिया हाती धाडी निरोप ।</span><span class="ln">पंढरपुरी आहे माझा मायबाप ॥ १ ॥</span></div>
-<div class="short">॥ येई हो विठ्ठले माझे माउली ये ॥</div>
-<div class="stanza"><span class="ln">पिवळा पीतांबर कैसा गगनीं झळकला ।</span><span class="ln">गरुडावरी बैसोनि माझा कैवारी आला ॥ २ ॥</span></div>
-<div class="short">॥ येई हो विठ्ठले माझे माउली ये ॥</div>
-<div class="stanza"><span class="ln">विठोबाचे राज्य आम्हां नित्य दिपवाळी ।</span><span class="ln">विष्णुदास नामा जीवें भावें ओवाळी ॥ ३ ॥</span></div>
-<div class="short">॥ येई हो विठ्ठले माझे माउली ये ॥</div>
-</section>
-<section class="aarti" id="shendur">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">श्री गणरायाची आरती</p>
-<h2>शेंदूर लाल चढायो</h2>
-<p class="credit">नाममुद्रा : गोसावीनंदन</p>
-<div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="stanza"><span class="ln">शेंदूर लाल चढायो अच्छा गजमुखको ।</span><span class="ln">दोंदिल लाल बिराजे सुत गौरीहरको ।</span><span class="ln">हाथ लिए गुडलड्डू सांई सुरवरको ।</span><span class="ln">महिमा कहे न जाय लागत हूं पादको ॥ १ ॥</span></div>
-<div class="refrain"><span class="tag">धृ.</span><span class="ln">जय देव जय देव ।</span><span class="ln">जय जय श्री गणराज विद्यासुखदाता ।</span><span class="ln">धन्य तुम्हारो दर्शन मेरा मन रमता ॥ जय देव जय देव ॥</span></div>
-<div class="stanza"><span class="ln">अष्टौ सिद्धि दासी संकटको बैरी ।</span><span class="ln">विघ्नविनाशन मंगलमूरत अधिकारी ।</span><span class="ln">कोटिसूर्यप्रकाश ऐसी छबी तेरी ।</span><span class="ln">गंडस्थल मदमस्तक झूले शशिबिहारी ॥ २ ॥</span></div>
-<div class="short">॥ जय देव जय देव ॥</div>
-<div class="stanza"><span class="ln">भावभगत से कोई शरणागत आवे ।</span><span class="ln">संतति संपत्ति सबही भरपूर पावे ।</span><span class="ln">ऐसे तुम महाराज मोको अति भावे ।</span><span class="ln">गोसावीनंदन निशिदिन गुण गावे ॥ ३ ॥</span></div>
-<div class="short">॥ जय देव जय देव ॥</div>
-</section>
-<section class="aarti" id="tusukhakarta">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">श्री गणपतीचे भक्तिगीत</p>
-<h2>तू सुखकर्ता तू दुःखहर्ता</h2>
-<div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="refrain"><span class="tag">धृ.</span><span class="ln">तू सुखकर्ता तू दुःखहर्ता विघ्न विनाशक मोरया ।</span><span class="ln">संकटी रक्षी शरण तुला मी, गणपती बाप्पा मोरया ॥</span></div>
-<div class="stanza"><span class="ln">मंगलमूर्ती तू गणनायक, वक्रतुंड तू सिद्धिविनायक ।</span><span class="ln">तुझिया द्वारी आज पातलो, ये इच्छित मज द्याया ॥ १ ॥</span></div>
-<div class="short">॥ तू सुखकर्ता तू दुःखहर्ता ॥</div>
-<div class="stanza"><span class="ln">तू सकलांचा भाग्य विधाता, तू विद्येचा स्वामी दाता ।</span><span class="ln">ज्ञानदीप उजळून आमुचा, निमवी नैराश्याला ॥ २ ॥</span></div>
-<div class="short">॥ तू सुखकर्ता तू दुःखहर्ता ॥</div>
-<div class="stanza"><span class="ln">तू माता तू पिता जगी या, ज्ञाता तू सर्वस्व जगी या ।</span><span class="ln">पामर मी, स्वर उणे भासती, तुझी आरती गाया ॥ ३ ॥</span></div>
-<div class="short">॥ तू सुखकर्ता तू दुःखहर्ता ॥</div>
-</section>
-<section class="aarti" id="dashavatar">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">श्री दशावतारांची आरती</p>
-<h2>आरती सप्रेम जय जय विठ्ठल परब्रह्म</h2>
-<div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="refrain"><span class="tag">धृ.</span><span class="ln">आरती सप्रेम जय जय विठ्ठल परब्रह्म ।</span><span class="ln">भक्तसंकटी नाना स्वरूपी स्थापिसी स्वधर्म ॥</span></div>
-<div class="stanza"><span class="ln">अंबऋषीकारणे गर्भवास सोशीसी ।</span><span class="ln">वेद नेले चोरूनि ब्रह्मया आणुनि देसी ।</span><span class="ln">मत्स्यरूपी नारायण सप्तही सागर धुंडीसी ।</span><span class="ln">हस्त तुझा लागता शंखासुरा वर देसी ॥ १ ॥</span></div>
-<div class="short">॥ आरती सप्रेम जय जय विठ्ठल परब्रह्म ॥</div>
-<div class="stanza"><span class="ln">रसातळासी जाता पृथ्वी पाठीवर घेसी ।</span><span class="ln">परोपकारासाठी देवा कांसव झालासी ।</span><span class="ln">दाढे धरूनी पृथ्वी नेता वराहरूप होसी ।</span><span class="ln">प्रल्हादाकारणे स्तंभी नरहरि गुरगुरसी ॥ २ ॥</span></div>
-<div class="short">॥ आरती सप्रेम जय जय विठ्ठल परब्रह्म ॥</div>
-<div class="stanza"><span class="ln">पांचवे अवतारी बळीच्या द्वाराला जासी ।</span><span class="ln">भिक्षे स्थळ मागुनी बळीला पाताळा नेसी ।</span><span class="ln">सर्व समर्पण केले म्हणुनी प्रसन्न त्या होसी ।</span><span class="ln">वामनरूप धरूनी बळीच्या द्वारी तिष्ठसी ॥ ३ ॥</span></div>
-<div class="short">॥ आरती सप्रेम जय जय विठ्ठल परब्रह्म ॥</div>
-<div class="stanza"><span class="ln">सहस्रार्जुन मातला जमदग्नीचा वध केला ।</span><span class="ln">कष्टी ते रेणुका म्हणुनी सहस्रार्जुन वधिला ।</span><span class="ln">निःक्षत्री पृथ्वी दान दिधली विप्राला ।</span><span class="ln">सहावा अवतार परशुराम प्रगटला ॥ ४ ॥</span></div>
-<div class="short">॥ आरती सप्रेम जय जय विठ्ठल परब्रह्म ॥</div>
-<div class="stanza"><span class="ln">मातला रावण सर्वां उपद्रव केला ।</span><span class="ln">तेहतीस कोटी देव बंदी हरिले सीतेला ।</span><span class="ln">पितृवचनालागी रामे वनवास केला ।</span><span class="ln">मिळोनी वानरसहित राजाराम प्रगटला ॥ ५ ॥</span></div>
-<div class="short">॥ आरती सप्रेम जय जय विठ्ठल परब्रह्म ॥</div>
-<div class="stanza"><span class="ln">देवकीवसुदेवबंदीमोचन त्वां केले ।</span><span class="ln">नंदाघरी जाऊनि निजसुख गोकुळा दिधले ।</span><span class="ln">गोरसचोरी करिता नवलक्ष गोपाळ मिळविले ।</span><span class="ln">गोपिकांचे प्रेम देखुनि श्रीकृष्ण भुलले ॥ ६ ॥</span></div>
-<div class="short">॥ आरती सप्रेम जय जय विठ्ठल परब्रह्म ॥</div>
-<div class="stanza"><span class="ln">बौद्ध कलंकी कलियुगी झाला अधर्म हा अवघा ।</span><span class="ln">सोडुनि दिधला धर्म म्हणुनि न दिससी देवा ।</span><span class="ln">म्लेंच्छमर्दन करिसी म्हणोनि कलंकी केशवा ।</span><span class="ln">बहिरवि जान्हवी द्यावी निजसुखानंदाची सेवा ॥ ७ ॥</span></div>
-<div class="short">॥ आरती सप्रेम जय जय विठ्ठल परब्रह्म ॥</div>
-</section>
-<section class="aarti" id="hanuman">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">श्री हनुमंताची आरती</p>
-<h2>सत्राणे उड्डाणे हुंकार वदनी</h2>
-<p class="credit">रचना : समर्थ रामदास स्वामी</p>
-<div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="stanza"><span class="ln">सत्राणे उड्डाणे हुंकार वदनी ।</span><span class="ln">करि डळमळ भूमंडळ सिंधूजळ गगनी ।</span><span class="ln">कडाडिले ब्रह्मांड धाके त्रिभुवनी ।</span><span class="ln">सुरवर नर निशाचर त्या झाल्या पळणी ॥ १ ॥</span></div>
-<div class="refrain"><span class="tag">धृ.</span><span class="ln">जय देव जय देव जय श्री हनुमंता ।</span><span class="ln">तुमचेनि प्रसादें न भी कृतांता ॥ जय देव जय देव ॥</span></div>
-<div class="stanza"><span class="ln">दुमदुमिले पाताळ उठिला प्रतिशब्द ।</span><span class="ln">थरथरला धरणीधर मानिला खेद ।</span><span class="ln">कडकडिले पर्वत उडुगण उच्छेद ।</span><span class="ln">रामी रामदासा शक्तीचा शोध ॥ २ ॥</span></div>
-<div class="short">॥ जय देव जय देव ॥</div>
-</section>
-<section class="aarti" id="datta">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">श्री दत्ताची आरती</p>
-<h2>त्रिगुणात्मक त्रैमूर्ती दत्त हा जाणा</h2>
-<p class="credit">नाममुद्रा : एका जनार्दनी</p>
-<div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="stanza"><span class="ln">त्रिगुणात्मक त्रैमूर्ती दत्त हा जाणा ।</span><span class="ln">त्रिगुणी अवतार त्रैलोक्य राणा ।</span><span class="ln">नेती नेती शब्द न ये अनुमाना ।</span><span class="ln">सुरवर मुनिजन योगी समाधी न ये ध्याना ॥ १ ॥</span></div>
-<div class="refrain"><span class="tag">धृ.</span><span class="ln">जय देव जय देव जय श्री गुरुदत्ता ।</span><span class="ln">आरती ओवाळिता हरली भवचिंता ॥ जय देव जय देव ॥</span></div>
-<div class="stanza"><span class="ln">सबाह्य अभ्यंतरी तू एक दत्त ।</span><span class="ln">अभाग्यासी कैची कळेल ही मात ।</span><span class="ln">पराही परतली तेथे कैचा हेत ।</span><span class="ln">जन्ममरणाचाही पुरलासे अंत ॥ २ ॥</span></div>
-<div class="short">॥ जय देव जय देव ॥</div>
-<div class="stanza"><span class="ln">दत्त येऊनिया उभा ठाकला ।</span><span class="ln">सद्भावे साष्टांग प्रणिपात केला ।</span><span class="ln">प्रसन्न होऊनिया आशीर्वाद दिधला ।</span><span class="ln">जन्ममरणाचा फेरा चुकविला ॥ ३ ॥</span></div>
-<div class="short">॥ जय देव जय देव ॥</div>
-<div class="stanza"><span class="ln">दत्त दत्त ऐसे लागले ध्यान ।</span><span class="ln">हरपले मन झाले उन्मन ।</span><span class="ln">मीतूंपणाची झाली बोळवण ।</span><span class="ln">एका जनार्दनी श्रीदत्तध्यान ॥ ४ ॥</span></div>
-<div class="short">॥ जय देव जय देव ॥</div>
-</section>
-<section class="aarti" id="dnyanraj">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">श्री ज्ञानदेवांची आरती</p>
-<h2>आरती ज्ञानराजा महाकैवल्यतेजा</h2>
-<p class="credit">नाममुद्रा : रामजनार्दन</p>
-<div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="refrain"><span class="tag">धृ.</span><span class="ln">आरती ज्ञानराजा । महाकैवल्यतेजा ।</span><span class="ln">सेविती साधुसंत । मनु वेधला माझा ॥</span></div>
-<div class="stanza"><span class="ln">लोपले ज्ञान जगी । हित नेणती कोणी ।</span><span class="ln">अवतार पांडुरंग । नाम ठेविले ज्ञानी ॥ १ ॥</span></div>
-<div class="short">॥ आरती ज्ञानराजा ॥</div>
-<div class="stanza"><span class="ln">कनकाचे ताट करी । उभ्या गोपिका नारी ।</span><span class="ln">नारद तुंबर हो । साम गायन करी ॥ २ ॥</span></div>
-<div class="short">॥ आरती ज्ञानराजा ॥</div>
-<div class="stanza"><span class="ln">प्रकट गुह्य बोले । विश्व ब्रह्मचि केले ।</span><span class="ln">रामजनार्दनी । पायी मस्तक ठेविले ॥ ३ ॥</span></div>
-<div class="short">॥ आरती ज्ञानराजा ॥</div>
-</section>
-<section class="aarti" id="ghalin">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">प्रार्थना</p>
-<h2>घालीन लोटांगण</h2>
-<p class="credit">पारंपरिक प्रार्थना</p>
-<div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="stanza"><span class="ln">घालीन लोटांगण वंदीन चरण ।</span><span class="ln">डोळ्यांनी पाहीन रूप तुझे ।</span><span class="ln">प्रेमे आलिंगन आनंदे पूजीन ।</span><span class="ln">भावे ओवाळीन म्हणे नामा ॥ १ ॥</span></div>
-<div class="stanza"><span class="ln">त्वमेव माता च पिता त्वमेव ।</span><span class="ln">त्वमेव बंधुश्च सखा त्वमेव ।</span><span class="ln">त्वमेव विद्या द्रविणं त्वमेव ।</span><span class="ln">त्वमेव सर्वं मम देवदेव ॥ २ ॥</span></div>
-<div class="stanza"><span class="ln">कायेन वाचा मनसेंद्रियैर्वा ।</span><span class="ln">बुद्ध्यात्मना वा प्रकृतिस्वभावात् ।</span><span class="ln">करोमि यद्यत् सकलं परस्मै ।</span><span class="ln">नारायणायेति समर्पयामि ॥ ३ ॥</span></div>
-<div class="stanza"><span class="ln">अच्युतं केशवं रामनारायणं ।</span><span class="ln">कृष्णदामोदरं वासुदेवं हरिम् ।</span><span class="ln">श्रीधरं माधवं गोपिकावल्लभं ।</span><span class="ln">जानकीनायकं रामचंद्रं भजे ॥ ४ ॥</span></div>
-<div class="stanza"><span class="ln">हरे राम हरे राम राम राम हरे हरे ।</span><span class="ln">हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे ॥ ५ ॥</span></div>
-</section>
-<section class="aarti flow" id="karpoor" data-flow="1">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">कर्पूरारती</p>
-<h2>कर्पूरगौरं करुणावतारं</h2>
-<div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="stanza"><span class="ln">कर्पूरगौरं करुणावतारं संसारसारं भुजगेंद्रहारम् ।</span><span class="ln">सदा वसंतं हृदयारविंदे भवं भवानीसहितं नमामि ॥</span></div>
-</section>
-<section class="aarti" id="pushpanjali">
-<a class="totop" href="#top">↑ अनुक्रमणिका</a>
-<p class="deity">आरतीनंतर</p>
-<h2>मंत्रपुष्पांजली</h2>
-<div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="stanza"><span class="ln">ॐ यज्ञेन यज्ञमयजंत देवास्तानि धर्माणि प्रथमान्यासन् ।</span><span class="ln">ते ह नाकं महिमानः सचंत यत्र पूर्वे साध्याः संति देवाः ॥</span></div>
-<div class="stanza"><span class="ln">ॐ राजाधिराजाय प्रसह्य साहिने ।</span><span class="ln">नमो वयं वैश्रवणाय कुर्महे ।</span><span class="ln">स मे कामान् कामकामाय मह्यं ।</span><span class="ln">कामेश्वरो वैश्रवणो ददातु ।</span><span class="ln">कुबेराय वैश्रवणाय महाराजाय नमः ॥</span></div>
-<div class="stanza"><span class="ln">ॐ स्वस्ति साम्राज्यं भौज्यं स्वाराज्यं वैराज्यं पारमेष्ठ्यं राज्यं</span><span class="ln">महाराज्यमाधिपत्यमयं समंतपर्यायी स्यात् सार्वभौमः सार्वायुष</span><span class="ln">आंतादापरार्धात् पृथिव्यै समुद्रपर्यंताया एकराळिति ॥</span></div>
-<div class="stanza"><span class="ln">तदप्येष श्लोकोऽभिगीतो मरुतः परिवेष्टारो मरुत्तस्यावसन् गृहे ।</span><span class="ln">आविक्षितस्य कामप्रेर्विश्वेदेवाः सभासद इति ॥</span></div>
-<div class="stanza"><span class="ln">ॐ एकदंताय विद्महे वक्रतुंडाय धीमहि ।</span><span class="ln">तन्नो दंतिः प्रचोदयात् ॥</span></div>
-<div class="stanza"><span class="ln">ॐ नाना सुगंधपुष्पाणि यथाकालोद्भवानि च ।</span><span class="ln">पुष्पांजलिर्मया दत्तो गृहाण परमेश्वर ॥</span></div>
-<div class="stanza"><span class="ln">॥ मंत्रपुष्पांजलिं समर्पयामि ॥</span></div>
-</section>
-<footer class="colophon">
-  ही आरती-रचना प्रचलित पारंपरिक पाठानुसार दिली आहे; प्रदेशानुसार काही शब्दांत किरकोळ पाठभेद आढळू शकतात.
-</footer>
-</div>
-<a class="fab" href="#top" aria-label="अनुक्रमणिकेकडे परत">↑</a>
-<script type="application/json" id="baseorder">["sukhakarta", "durge", "lavthavti", "mahalakshmi", "renuka", "navratri", "gajanan", "pandurang", "vitthal", "shendur", "tusukhakarta", "dashavatar", "hanuman", "datta", "dnyanraj", "ghalin", "karpoor", "pushpanjali"]</script>
-<script id="app">
-(function(){
-  document.documentElement.classList.add('js');
-  var KEY='aarti-order-v1';
-  var toc=document.querySelector('.toc'), wrap=document.querySelector('.wrap'), foot=document.querySelector('.colophon');
-  function dn(n){return String(n).replace(/[0-9]/g,function(d){return '०१२३४५६७८९'.charAt(d);});}
-  function ids(){return Array.prototype.map.call(toc.querySelectorAll('li'),function(li){return li.getAttribute('data-id');});}
-  var CANON=ids();
-  var original=CANON.slice();
-  try{var bk=JSON.parse(document.getElementById('baseorder').textContent); if(bk&&bk.length){original=bk;}}catch(e){}
-  function renumber(){
-    Array.prototype.forEach.call(toc.querySelectorAll('li'),function(li,i){li.querySelector('.num').textContent=dn(i+1)+'.';});
-    var changed=ids().join()!==CANON.join();
-    Array.prototype.forEach.call(document.querySelectorAll('.aarti'),function(sec){
-      sec.classList.toggle('flow',!changed && sec.getAttribute('data-flow')==='1');
-    });
-  }
-  function sync(){
-    ids().forEach(function(id){var sec=document.getElementById(id); if(sec){wrap.insertBefore(sec,foot);}});
-    renumber();
-  }
-  function save(){try{localStorage.setItem(KEY,JSON.stringify(ids()));}catch(e){}}
-  function applyOrder(order){
-    var have=ids(), merged=order.filter(function(x){return have.indexOf(x)>-1;})
-      .concat(have.filter(function(x){return order.indexOf(x)===-1;}));
-    merged.forEach(function(id){toc.appendChild(toc.querySelector('li[data-id="'+id+'"]'));});
-    sync();
-  }
-  if(original.join()!==CANON.join()){applyOrder(original);}
-  try{var saved=JSON.parse(localStorage.getItem(KEY)||'null'); if(saved&&saved.length){applyOrder(saved);}}catch(e){}
 
-  toc.addEventListener('click',function(e){
-    var b=e.target.closest('button'); if(!b) return;
-    var li=b.closest('li');
-    if(b.classList.contains('up') && li.previousElementSibling){toc.insertBefore(li,li.previousElementSibling);}
-    else if(b.classList.contains('down') && li.nextElementSibling){toc.insertBefore(li.nextElementSibling,li);}
-    else return;
-    sync(); save(); li.scrollIntoView({block:'nearest'});
-  });
+<a class="totop" href="#top"><span class="dv">↑ अनुक्रमणिका</span><span class="rm">↑ Index</span></a>
 
-  var dragged=null;
-  toc.addEventListener('dragstart',function(e){
-    if(!document.body.classList.contains('reorder')) return;
-    dragged=e.target.closest('li'); if(!dragged) return;
-    dragged.classList.add('dragging');
-    try{e.dataTransfer.effectAllowed='move'; e.dataTransfer.setData('text/plain',dragged.getAttribute('data-id'));}catch(x){}
-  });
-  toc.addEventListener('dragover',function(e){
-    if(!dragged) return; e.preventDefault();
-    var li=e.target.closest('li'); if(!li||li===dragged) return;
-    var r=li.getBoundingClientRect();
-    if(e.clientY<r.top+r.height/2){toc.insertBefore(dragged,li);} else {toc.insertBefore(dragged,li.nextElementSibling);}
-  });
-  toc.addEventListener('dragend',function(){
-    if(!dragged) return; dragged.classList.remove('dragging'); dragged=null; sync(); save();
-  });
+<p class="deity"><span class="dv">श्री शंकराची आरती</span><span class="rm">Shri Shankarachi Aarati</span></p>
 
-  var rb=document.getElementById('reorderBtn');
-  rb.addEventListener('click',function(){
-    var on=document.body.classList.toggle('reorder');
-    rb.classList.toggle('on',on);
-    rb.textContent=on?'✓ पूर्ण':'⇅ क्रम बदला';
-    Array.prototype.forEach.call(toc.querySelectorAll('li'),function(li){li.draggable=on;});
-  });
-  document.getElementById('resetBtn').addEventListener('click',function(){
-    applyOrder(original); try{localStorage.removeItem(KEY);}catch(e){}
-  });
-  function buildHtml(){
-    var c=document.documentElement.cloneNode(true);
-    c.classList.remove('js'); if(!c.getAttribute('class')){c.removeAttribute('class');}
-    var b=c.querySelector('body'); b.classList.remove('reorder'); if(!b.getAttribute('class')){b.removeAttribute('class');}
-    Array.prototype.forEach.call(c.querySelectorAll('li'),function(li){li.removeAttribute('draggable'); li.classList.remove('dragging','over');});
-    var rbn=c.querySelector('#reorderBtn'); rbn.classList.remove('on'); rbn.textContent='⇅ क्रम बदला';
-    Array.prototype.forEach.call(c.querySelectorAll('script'),function(sc){if(sc.id!=='baseorder'&&sc.id!=='app'){sc.parentNode.removeChild(sc);}});
-    c.querySelector('#baseorder').textContent=JSON.stringify(ids());
-    return '<!DOCTYPE html>'+String.fromCharCode(10)+c.outerHTML;
-  }
-  function note(t){var h=document.getElementById('hint'); h.textContent=t; h.style.display='block';}
-  document.getElementById('saveBtn').addEventListener('click',function(){
-    var html=buildHtml(), name='Aarti-Sangraha-custom.html';
-    var cl=window.claude, p=(cl&&cl.use)?cl.use('downloads'):Promise.resolve(null);
-    p.then(function(d){
-      if(d){
-        return d.save({filename:name,data:html}).then(function(){note('फाईल जतन झाली. ही फाईल इतरांना पाठवा.');});
-      }
-      var a=document.createElement('a');
-      a.href=URL.createObjectURL(new Blob([html],{type:'text/html'}));
-      a.download=name; document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      note('फाईल डाउनलोड झाली. ही फाईल इतरांना पाठवा.');
-    }).catch(function(err){
-      if(err&&err.code==='declined'){return;}
-      note('जतन करता आले नाही. ही फाईल ब्राउझरमध्ये (Chrome/Safari) उघडून पुन्हा प्रयत्न करा.');
-    });
-  });
-  document.getElementById('printBtn').addEventListener('click',function(){window.print();});
-})();
-</script>
-</body>
-</html>
+<h2><span class="dv">लवथवती विक्राळा</span><span class="rm">Lavathavati Vikrala</span></h2>
+
+<p class="credit"><span class="dv">रचना : समर्थ रामदास स्वामी</span><span class="rm">Rachana : Samarth Ramadas Svami</span></p>
+
+<div class="orn" aria-hidden="true"><span>❖</span></div>
+
+<div class="stanza"><span class="ln"><span class="dv">लवथवती विक्राळा ब्रह्मांडी माळा ।</span><span class="rm">Lavathavati vikrala brahmandi mala |</span></span><span class="ln"><span cl
