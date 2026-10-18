@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
 <style>
 :root{
   --bg:#fffaf0; --paper:#fffdf7; --ink:#2b1a12; --muted:#7a5a47;
@@ -70,11 +71,25 @@ body{
 
 .hint{display:none; text-align:center; color:var(--muted); font-size:14px; line-height:1.6; margin:6px 0 0}
 .reorder .hint{display:block}
-.mv{display:none; gap:4px; padding-left:6px}
-.reorder .mv{display:flex}
-.mv button{font:inherit; width:34px; height:34px; border-radius:8px; border:1px solid var(--rule); background:var(--paper); color:var(--accent); cursor:pointer; font-size:14px}
-.reorder .toc li{cursor:grab}
-.toc li.dragging{opacity:.4}
+
+/* Touch & Desktop Drag Handle */
+.drag-handle{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:8px 10px;
+  color:var(--gold);
+  font-size:22px;
+  cursor:grab;
+  user-select:none;
+  -webkit-user-select:none;
+  touch-action:none;
+}
+.reorder .drag-handle{display:flex}
+.drag-handle:active{cursor:grabbing}
+.reorder .toc li{cursor:default}
+.sortable-ghost{opacity:.35; background:var(--tint)}
+.sortable-chosen{background:var(--paper)}
 
 /* TOC */
 .toc{list-style:none; margin:16px 0 0; padding:0}
@@ -153,7 +168,7 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
   .refrain{margin:7px auto; padding:7px 12px}
   .short{margin:0 0 7px}
   .colophon{break-inside:avoid}
-  .fab-dock, .autoscroll-bar, .ctrl, .hint, .mv, .tool-group, .search-box, .chip-bar{display:none !important}
+  .fab-dock, .autoscroll-bar, .ctrl, .hint, .drag-handle, .tool-group, .search-box, .chip-bar{display:none !important}
   .totop{font-size:9pt; margin:0 0 2mm}
 }
 </style>
@@ -209,27 +224,27 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
   <p class="toc-title"><span class="dv">अनुक्रमणिका</span><span class="rm">Index</span></p>
 
   <noscript><p class="hint" style="display:block">क्रम बदलणे, भाषा/थीम बदलणे व छापणे यासाठी ही फाईल Chrome किंवा Safari ब्राउझरमध्ये उघडा. / Open this file in Chrome or Safari for reordering, language, theme and print options.</p></noscript>
-  <p class="hint" id="hint">▲▼ दाबा किंवा नावे ओढून क्रम बदला. नंतर “माझ्या क्रमासह HTML जतन करा” दाबून ती फाईल इतरांना पाठवा.</p>
+  <p class="hint" id="hint">⠿ चिन्ह धरून आरतीचा क्रम सहज ओढून बदला. नंतर “माझ्या क्रमासह HTML जतन करा” दाबून ती फाईल इतरांना पाठवा.</p>
 
   <ol class="toc">
-    <li data-id="sukhakarta" data-deity="ganapati"><a href="#sukhakarta"><span class="num">१.</span><span class="t"><span class="dv">सुखकर्ता दुःखहर्ता</span><span class="rm">Sukhakarta Dukhaharta</span></span><span class="d"><span class="dv">श्री गणपतीची आरती</span><span class="rm">Shri Ganapatichi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
-    <li data-id="durge" data-deity="devi"><a href="#durge"><span class="num">२.</span><span class="t"><span class="dv">दुर्गे दुर्घट भारी</span><span class="rm">Durge Durghat Bhari</span></span><span class="d"><span class="dv">श्री दुर्गादेवीची आरती</span><span class="rm">Shri Durgadevichi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
-    <li data-id="lavthavti" data-deity="shiva"><a href="#lavthavti"><span class="num">३.</span><span class="t"><span class="dv">लवथवती विक्राळा</span><span class="rm">Lavathavati Vikrala</span></span><span class="d"><span class="dv">श्री शंकराची आरती</span><span class="rm">Shri Shankarachi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
-    <li data-id="mahalakshmi" data-deity="devi"><a href="#mahalakshmi"><span class="num">४.</span><span class="t"><span class="dv">जय देवी जय देवी जय महालक्ष्मी</span><span class="rm">Jay Devi Jay Devi Jay Mahalakshmi</span></span><span class="d"><span class="dv">श्री महालक्ष्मीची आरती</span><span class="rm">Shri Mahalakshmichi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
-    <li data-id="renuka" data-deity="devi"><a href="#renuka"><span class="num">५.</span><span class="t"><span class="dv">जय जय जगदंबे श्री अंबे</span><span class="rm">Jay Jay Jagadambe Shri Ambe</span></span><span class="d"><span class="dv">श्री रेणुका मातेची आरती</span><span class="rm">Shri Renuka Matechi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
-    <li data-id="navratri" data-deity="devi"><a href="#navratri"><span class="num">६.</span><span class="t"><span class="dv">अश्विनशुद्धपक्षी अंबा बैसली</span><span class="rm">Ashvinashuddhapakshi Amba Baisali</span></span><span class="d"><span class="dv">नवरात्र — श्री अंबाबाईची आरती</span><span class="rm">Navaratr — Shri Ambabaichi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
-    <li data-id="gajanan" data-deity="datta"><a href="#gajanan"><span class="num">७.</span><span class="t"><span class="dv">जय जय सत्चित्स्वरूपा स्वामी गणराया</span><span class="rm">Jay Jay Satchitsvarupa Svami Ganaraya</span></span><span class="d"><span class="dv">श्री गजानन महाराजांची आरती</span><span class="rm">Shri Gajanan Maharajanchi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
-    <li data-id="pandurang" data-deity="vitthal"><a href="#pandurang"><span class="num">८.</span><span class="t"><span class="dv">युगे अठ्ठावीस विटेवरी उभा</span><span class="rm">Yuge Aththavis Vitevari Ubha</span></span><span class="d"><span class="dv">श्री पांडुरंगाची आरती</span><span class="rm">Shri Pandurangachi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
-    <li data-id="vitthal" data-deity="vitthal"><a href="#vitthal"><span class="num">९.</span><span class="t"><span class="dv">येई हो विठ्ठले माझे माउली ये</span><span class="rm">Yei Ho Viththale Majhe Mauli Ye</span></span><span class="d"><span class="dv">श्री विठ्ठलाची आरती</span><span class="rm">Shri Viththalachi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
-    <li data-id="shendur" data-deity="ganapati"><a href="#shendur"><span class="num">१०.</span><span class="t"><span class="dv">शेंदूर लाल चढायो</span><span class="rm">Shendur Lal Chadhayo</span></span><span class="d"><span class="dv">श्री गणरायाची आरती</span><span class="rm">Shri Ganarayachi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
-    <li data-id="tusukhakarta" data-deity="ganapati"><a href="#tusukhakarta"><span class="num">११.</span><span class="t"><span class="dv">तू सुखकर्ता तू दुःखहर्ता</span><span class="rm">Tu Sukhakarta Tu Dukhaharta</span></span><span class="d"><span class="dv">श्री गणपतीची आरती</span><span class="rm">Shri Ganapatichi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
-    <li data-id="dashavatar" data-deity="vitthal"><a href="#dashavatar"><span class="num">१२.</span><span class="t"><span class="dv">आरती सप्रेम जय जय विठ्ठल परब्रह्म</span><span class="rm">Aarati Saprem Jay Jay Viththal Parabrahm</span></span><span class="d"><span class="dv">श्री दशावतारांची आरती</span><span class="rm">Shri Dashavataranchi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
-    <li data-id="hanuman" data-deity="hanuman"><a href="#hanuman"><span class="num">१३.</span><span class="t"><span class="dv">सत्राणे उड्डाणे हुंकार वदनी</span><span class="rm">Satrane Uddane Hunkar Vadani</span></span><span class="d"><span class="dv">श्री हनुमंताची आरती</span><span class="rm">Shri Hanumantachi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
-    <li data-id="datta" data-deity="datta"><a href="#datta"><span class="num">१४.</span><span class="t"><span class="dv">त्रिगुणात्मक त्रैमूर्ती दत्त हा जाणा</span><span class="rm">Trigunatmak Traimurti Datt Ha Jana</span></span><span class="d"><span class="dv">श्री दत्ताची आरती</span><span class="rm">Shri Dattachi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
-    <li data-id="dnyanraj" data-deity="vitthal"><a href="#dnyanraj"><span class="num">१५.</span><span class="t"><span class="dv">आरती ज्ञानराजा महाकैवल्यतेजा</span><span class="rm">Aarati Dnyanaraja Mahakaivalyateja</span></span><span class="d"><span class="dv">श्री ज्ञानदेवांची आरती</span><span class="rm">Shri Dnyanadevanchi Aarati</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
-    <li data-id="karpoor" data-deity="shiva"><a href="#karpoor"><span class="num">१६.</span><span class="t"><span class="dv">कर्पूरगौरं करुणावतारं (शिवस्तुतीसह)</span><span class="rm">Karpuragauram Karunavataram (with Shivastuti)</span></span><span class="d"><span class="dv">कर्पूरारती व शिवस्तुती</span><span class="rm">Karpurarati and Shivastuti</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
-    <li data-id="ghalin" data-deity="prarthana"><a href="#ghalin"><span class="num">१७.</span><span class="t"><span class="dv">घालीन लोटांगण</span><span class="rm">Ghalin Lotangan</span></span><span class="d"><span class="dv">प्रार्थना</span><span class="rm">Prarthana</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
-    <li data-id="pushpanjali" data-deity="prarthana"><a href="#pushpanjali"><span class="num">१८.</span><span class="t"><span class="dv">मंत्रपुष्पांजली</span><span class="rm">Mantrapushpanjali</span></span><span class="d"><span class="dv">आरतीनंतर</span><span class="rm">Aaratinantar</span></span></a><span class="mv"><button type="button" class="up" aria-label="वर हलवा">▲</button><button type="button" class="down" aria-label="खाली हलवा">▼</button></span></li>
+    <li data-id="sukhakarta" data-deity="ganapati"><a href="#sukhakarta"><span class="num">१.</span><span class="t"><span class="dv">सुखकर्ता दुःखहर्ता</span><span class="rm">Sukhakarta Dukhaharta</span></span><span class="d"><span class="dv">श्री गणपतीची आरती</span><span class="rm">Shri Ganapatichi Aarati</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
+    <li data-id="durge" data-deity="devi"><a href="#durge"><span class="num">२.</span><span class="t"><span class="dv">दुर्गे दुर्घट भारी</span><span class="rm">Durge Durghat Bhari</span></span><span class="d"><span class="dv">श्री दुर्गादेवीची आरती</span><span class="rm">Shri Durgadevichi Aarati</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
+    <li data-id="lavthavti" data-deity="shiva"><a href="#lavthavti"><span class="num">३.</span><span class="t"><span class="dv">लवथवती विक्राळा</span><span class="rm">Lavathavati Vikrala</span></span><span class="d"><span class="dv">श्री शंकराची आरती</span><span class="rm">Shri Shankarachi Aarati</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
+    <li data-id="mahalakshmi" data-deity="devi"><a href="#mahalakshmi"><span class="num">४.</span><span class="t"><span class="dv">जय देवी जय देवी जय महालक्ष्मी</span><span class="rm">Jay Devi Jay Devi Jay Mahalakshmi</span></span><span class="d"><span class="dv">श्री महालक्ष्मीची आरती</span><span class="rm">Shri Mahalakshmichi Aarati</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
+    <li data-id="renuka" data-deity="devi"><a href="#renuka"><span class="num">५.</span><span class="t"><span class="dv">जय जय जगदंबे श्री अंबे</span><span class="rm">Jay Jay Jagadambe Shri Ambe</span></span><span class="d"><span class="dv">श्री रेणुका मातेची आरती</span><span class="rm">Shri Renuka Matechi Aarati</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
+    <li data-id="navratri" data-deity="devi"><a href="#navratri"><span class="num">६.</span><span class="t"><span class="dv">अश्विनशुद्धपक्षी अंबा बैसली</span><span class="rm">Ashvinashuddhapakshi Amba Baisali</span></span><span class="d"><span class="dv">नवरात्र — श्री अंबाबाईची आरती</span><span class="rm">Navaratr — Shri Ambabaichi Aarati</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
+    <li data-id="gajanan" data-deity="datta"><a href="#gajanan"><span class="num">७.</span><span class="t"><span class="dv">जय जय सत्चित्स्वरूपा स्वामी गणराया</span><span class="rm">Jay Jay Satchitsvarupa Svami Ganaraya</span></span><span class="d"><span class="dv">श्री गजानन महाराजांची आरती</span><span class="rm">Shri Gajanan Maharajanchi Aarati</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
+    <li data-id="pandurang" data-deity="vitthal"><a href="#pandurang"><span class="num">८.</span><span class="t"><span class="dv">युगे अठ्ठावीस विटेवरी उभा</span><span class="rm">Yuge Aththavis Vitevari Ubha</span></span><span class="d"><span class="dv">श्री पांडुरंगाची आरती</span><span class="rm">Shri Pandurangachi Aarati</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
+    <li data-id="vitthal" data-deity="vitthal"><a href="#vitthal"><span class="num">९.</span><span class="t"><span class="dv">येई हो विठ्ठले माझे माउली ये</span><span class="rm">Yei Ho Viththale Majhe Mauli Ye</span></span><span class="d"><span class="dv">श्री विठ्ठलाची आरती</span><span class="rm">Shri Viththalachi Aarati</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
+    <li data-id="shendur" data-deity="ganapati"><a href="#shendur"><span class="num">१०.</span><span class="t"><span class="dv">शेंदूर लाल चढायो</span><span class="rm">Shendur Lal Chadhayo</span></span><span class="d"><span class="dv">श्री गणरायाची आरती</span><span class="rm">Shri Ganarayachi Aarati</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
+    <li data-id="tusukhakarta" data-deity="ganapati"><a href="#tusukhakarta"><span class="num">११.</span><span class="t"><span class="dv">तू सुखकर्ता तू दुःखहर्ता</span><span class="rm">Tu Sukhakarta Tu Dukhaharta</span></span><span class="d"><span class="dv">श्री गणपतीची आरती</span><span class="rm">Shri Ganapatichi Aarati</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
+    <li data-id="dashavatar" data-deity="vitthal"><a href="#dashavatar"><span class="num">१२.</span><span class="t"><span class="dv">आरती सप्रेम जय जय विठ्ठल परब्रह्म</span><span class="rm">Aarati Saprem Jay Jay Viththal Parabrahm</span></span><span class="d"><span class="dv">श्री दशावतारांची आरती</span><span class="rm">Shri Dashavataranchi Aarati</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
+    <li data-id="hanuman" data-deity="hanuman"><a href="#hanuman"><span class="num">१३.</span><span class="t"><span class="dv">सत्राणे उड्डाणे हुंकार वदनी</span><span class="rm">Satrane Uddane Hunkar Vadani</span></span><span class="d"><span class="dv">श्री हनुमंताची आरती</span><span class="rm">Shri Hanumantachi Aarati</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
+    <li data-id="datta" data-deity="datta"><a href="#datta"><span class="num">१४.</span><span class="t"><span class="dv">त्रिगुणात्मक त्रैमूर्ती दत्त हा जाणा</span><span class="rm">Trigunatmak Traimurti Datt Ha Jana</span></span><span class="d"><span class="dv">श्री दत्ताची आरती</span><span class="rm">Shri Dattachi Aarati</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
+    <li data-id="dnyanraj" data-deity="vitthal"><a href="#dnyanraj"><span class="num">१५.</span><span class="t"><span class="dv">आरती ज्ञानराजा महाकैवल्यतेजा</span><span class="rm">Aarati Dnyanaraja Mahakaivalyateja</span></span><span class="d"><span class="dv">श्री ज्ञानदेवांची आरती</span><span class="rm">Shri Dnyanadevanchi Aarati</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
+    <li data-id="karpoor" data-deity="shiva"><a href="#karpoor"><span class="num">१६.</span><span class="t"><span class="dv">कर्पूरगौरं करुणावतारं (शिवस्तुतीसह)</span><span class="rm">Karpuragauram Karunavataram (with Shivastuti)</span></span><span class="d"><span class="dv">कर्पूरारती व शिवस्तुती</span><span class="rm">Karpurarati and Shivastuti</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
+    <li data-id="ghalin" data-deity="prarthana"><a href="#ghalin"><span class="num">१७.</span><span class="t"><span class="dv">घालीन लोटांगण</span><span class="rm">Ghalin Lotangan</span></span><span class="d"><span class="dv">प्रार्थना</span><span class="rm">Prarthana</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
+    <li data-id="pushpanjali" data-deity="prarthana"><a href="#pushpanjali"><span class="num">१८.</span><span class="t"><span class="dv">मंत्रपुष्पांजली</span><span class="rm">Mantrapushpanjali</span></span><span class="d"><span class="dv">आरतीनंतर</span><span class="rm">Aaratinantar</span></span></a><span class="drag-handle" aria-label="क्रम बदला">⠿</span></li>
   </ol>
 </header>
 
@@ -729,7 +744,7 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
       var sec = document.getElementById(id);
       var deity = li.getAttribute('data-deity') || '';
       var textContent = (li.textContent + ' ' + (sec ? sec.textContent : '')).toLowerCase();
-      
+
       var matchesSearch = !q || textContent.indexOf(q) > -1;
       var matchesTag = (activeTag === 'all') || (deity === activeTag);
 
@@ -751,33 +766,55 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
     });
   });
 
-  /* --- 5. Hands-Free Auto-Scroll Mode --- */
+  /* --- 5. Mobile & Desktop Robust Auto-Scroll --- */
   var autoScrollBar = document.getElementById('autoScrollBar');
   var scrollTogglePlay = document.getElementById('scrollTogglePlay');
   var scrollSpeedBtn = document.getElementById('scrollSpeedBtn');
   var isScrolling = false;
-  var scrollSpeed = 1; // 1, 1.5, 2
-  var scrollInterval = null;
+  var scrollSpeed = 1;
+  var animFrameId = null;
+  var lastTimestamp = 0;
+  var fractionalScroll = 0;
+
+  function autoScrollStep(timestamp){
+    if(!isScrolling) return;
+    if(!lastTimestamp) lastTimestamp = timestamp;
+    var delta = timestamp - lastTimestamp;
+    lastTimestamp = timestamp;
+
+    var pxPerSecond = 28 * scrollSpeed;
+    fractionalScroll += (pxPerSecond * delta) / 1000;
+
+    if(fractionalScroll >= 1){
+      var movePx = Math.floor(fractionalScroll);
+      window.scrollBy(0, movePx);
+      fractionalScroll -= movePx;
+    }
+
+    var scrollElement = document.scrollingElement || document.documentElement || document.body;
+    var maxScroll = scrollElement.scrollHeight - window.innerHeight;
+    if(window.pageYOffset >= maxScroll - 2){
+      stopAutoScroll();
+      return;
+    }
+
+    animFrameId = requestAnimationFrame(autoScrollStep);
+  }
 
   function stopAutoScroll(){
     isScrolling = false;
-    if(scrollInterval) clearInterval(scrollInterval);
-    scrollInterval = null;
+    if(animFrameId){ cancelAnimationFrame(animFrameId); animFrameId = null; }
+    lastTimestamp = 0;
+    fractionalScroll = 0;
     scrollTogglePlay.textContent = u() ? '▶ Start' : '▶ सुरू करा';
   }
 
   function startAutoScroll(){
     isScrolling = true;
+    lastTimestamp = 0;
+    fractionalScroll = 0;
     scrollTogglePlay.textContent = u() ? '⏸ Pause' : '⏸ थांबवा';
-    var step = 1;
-    var delay = 35 / scrollSpeed;
-    if(scrollInterval) clearInterval(scrollInterval);
-    scrollInterval = setInterval(function(){
-      window.scrollBy(0, step);
-      if((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 5){
-        stopAutoScroll();
-      }
-    }, delay);
+    animFrameId = requestAnimationFrame(autoScrollStep);
   }
 
   document.getElementById('autoScrollToggle').addEventListener('click', function(){
@@ -794,7 +831,6 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
     else if(scrollSpeed === 1.5){ scrollSpeed = 2; }
     else { scrollSpeed = 1; }
     scrollSpeedBtn.textContent = (u() ? 'Speed: ' : 'वेग: ') + (scrollSpeed === 1 ? '१×' : (scrollSpeed === 1.5 ? '१.५×' : '२×'));
-    if(isScrolling){ startAutoScroll(); }
   });
 
   document.getElementById('scrollCloseBtn').addEventListener('click', function(){
@@ -802,38 +838,33 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
     autoScrollBar.classList.remove('show');
   });
 
-  /* Standard Reordering & Basic Listeners */
-  toc.addEventListener('click',function(e){
-    var b=e.target.closest('button'); if(!b) return;
-    var li=b.closest('li');
-    if(b.classList.contains('up') && li.previousElementSibling){toc.insertBefore(li,li.previousElementSibling);}
-    else if(b.classList.contains('down') && li.nextElementSibling){toc.insertBefore(li.nextElementSibling,li);}
-    else return;
-    sync(); saveOrder(); li.scrollIntoView({block:'nearest'});
-  });
+  /* --- 6. Seamless SortableJS Touch & Desktop Reordering --- */
+  var sortableInstance = null;
+  function initSortable(){
+    if(typeof Sortable !== 'undefined' && !sortableInstance){
+      sortableInstance = new Sortable(toc, {
+        handle: '.drag-handle',
+        animation: 200,
+        disabled: !body.classList.contains('reorder'),
+        ghostClass: 'sortable-ghost',
+        chosenClass: 'sortable-chosen',
+        onEnd: function(){
+          sync();
+          saveOrder();
+        }
+      });
+    }
+  }
+  initSortable();
 
-  var dragged=null;
-  toc.addEventListener('dragstart',function(e){
-    if(!body.classList.contains('reorder')) return;
-    dragged=e.target.closest('li'); if(!dragged) return;
-    dragged.classList.add('dragging');
-    try{e.dataTransfer.effectAllowed='move'; e.dataTransfer.setData('text/plain',dragged.getAttribute('data-id'));}catch(x){}
-  });
-  toc.addEventListener('dragover',function(e){
-    if(!dragged) return; e.preventDefault();
-    var li=e.target.closest('li'); if(!li||li===dragged) return;
-    var r=li.getBoundingClientRect();
-    if(e.clientY<r.top+r.height/2){toc.insertBefore(dragged,li);} else {toc.insertBefore(dragged,li.nextElementSibling);}
-  });
-  toc.addEventListener('dragend',function(){
-    if(!dragged) return; dragged.classList.remove('dragging'); dragged=null; sync(); saveOrder();
-  });
-
-  rb.addEventListener('click',function(){
-    var on=body.classList.toggle('reorder');
-    rb.classList.toggle('on',on);
-    Array.prototype.forEach.call(toc.querySelectorAll('li'),function(li){li.draggable=on;});
-    if(on){hintKey='hint';} labels();
+  rb.addEventListener('click', function(){
+    var on = body.classList.toggle('reorder');
+    rb.classList.toggle('on', on);
+    if(sortableInstance){
+      sortableInstance.option('disabled', !on);
+    }
+    if(on){ hintKey = 'hint'; }
+    labels();
   });
 
   document.getElementById('themeBtn').addEventListener('click',function(){
@@ -855,14 +886,16 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
     c.classList.remove('js'); if(!c.getAttribute('class')){c.removeAttribute('class');}
     c.removeAttribute('data-theme'); c.setAttribute('lang','mr');
     var b=c.querySelector('body'); b.classList.remove('reorder','m-en','m-both'); if(!b.getAttribute('class')){b.removeAttribute('class');}
-    Array.prototype.forEach.call(c.querySelectorAll('li'),function(li){li.removeAttribute('draggable'); li.classList.remove('dragging'); li.classList.remove('hidden');});
+    Array.prototype.forEach.call(c.querySelectorAll('li'),function(li){li.classList.remove('hidden');});
     Array.prototype.forEach.call(c.querySelectorAll('.aarti'),function(sec){sec.classList.remove('hidden');});
     c.querySelector('#reorderBtn').classList.remove('on');
     c.querySelector('#hint').removeAttribute('style');
     c.querySelector('#searchInput').value = '';
     var autoBar = c.querySelector('#autoScrollBar'); if(autoBar) autoBar.classList.remove('show');
     Array.prototype.forEach.call(c.querySelectorAll('script'),function(sc){
-      if(sc.id!=='baseorder'&&sc.id!=='app'&&sc.id!=='themeinit'&&sc.textContent.indexOf('aarti-theme')===-1){sc.parentNode.removeChild(sc);}
+      if(sc.id!=='baseorder'&&sc.id!=='app'&&sc.id!=='themeinit'&&sc.textContent.indexOf('aarti-theme')===-1 && sc.src.indexOf('Sortable')===-1){
+        sc.parentNode.removeChild(sc);
+      }
     });
     c.querySelector('#baseorder').textContent=JSON.stringify(ids());
     return '<!DOCTYPE html>'+String.fromCharCode(10)+c.outerHTML;
