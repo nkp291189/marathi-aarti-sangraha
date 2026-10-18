@@ -31,6 +31,10 @@
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+/* Crucial for mobile auto-scroll: overrides smooth scroll animation while auto-scrolling */
+html.auto-scrolling, html.auto-scrolling body{
+  scroll-behavior: auto !important;
+}
 body{
   margin:0; background:var(--bg); color:var(--ink);
   font-family:"Noto Serif Devanagari","Kohinoor Devanagari","Nirmala UI","Mangal","Mukta","FreeSerif",serif;
@@ -255,7 +259,7 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
 <h2><span class="dv">सुखकर्ता दुःखहर्ता</span><span class="rm">Sukhakarta Dukhaharta</span></h2>
 <p class="credit"><span class="dv">रचना : समर्थ रामदास स्वामी</span><span class="rm">Rachana : Samarth Ramadas Svami</span></p>
 <div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="stanza"><span class="ln"><span class="dv">सुखकर्ता दुःखहर्ता वार्ता विघ्नाची ।</span><span class="rm">Sukhakarta dukhaharta varta vighnachi |</span></span><span class="ln"><span class="dv">नुरवी पुरवी प्रेम कृपा जयाची ।</span><span class="rm">Nuravi puravi प्रेम kripa jayachi |</span></span><span class="ln"><span class="dv">सर्वांगी सुंदर उटी शेंदुराची ।</span><span class="rm">Sarvangi sundar uti shendurachi |</span></span><span class="ln"><span class="dv">कंठी झळके माळ मुक्ताफळांची ॥ १ ॥</span><span class="rm">Kanthi jhalake mal muktaphalanchi || 1 ||</span></span></div>
+<div class="stanza"><span class="ln"><span class="dv">सुखकर्ता दुःखहर्ता वार्ता विघ्नाची ।</span><span class="rm">Sukhakarta dukhaharta varta vighnachi |</span></span><span class="ln"><span class="dv">नुरवी पुरवी प्रेम कृपा जयाची ।</span><span class="rm">Nuravi puravi prem kripa jayachi |</span></span><span class="ln"><span class="dv">सर्वांगी सुंदर उटी शेंदुराची ।</span><span class="rm">Sarvangi sundar uti shendurachi |</span></span><span class="ln"><span class="dv">कंठी झळके माळ मुक्ताफळांची ॥ १ ॥</span><span class="rm">Kanthi jhalake mal muktaphalanchi || 1 ||</span></span></div>
 <div class="refrain"><span class="tag"><span class="dv">धृ.</span><span class="rm">Refrain</span></span><span class="ln"><span class="dv">जय देव जय देव जय मंगलमूर्ती ।</span><span class="rm">Jay dev jay dev jay mangalamurti |</span></span><span class="ln"><span class="dv">दर्शनमात्रे मनःकामना पुरती ॥ जय देव जय देव ॥</span><span class="rm">Darshanamatre manahkamana purati || jay dev jay dev ||</span></span></div>
 <div class="stanza"><span class="ln"><span class="dv">रत्नखचित फरा तुज गौरीकुमरा ।</span><span class="rm">Ratnakhachit phara tuj gaurikumara |</span></span><span class="ln"><span class="dv">चंदनाची उटी कुंकुमकेशरा ।</span><span class="rm">Chandanachi uti kunkumakeshara |</span></span><span class="ln"><span class="dv">हिरेजडित मुकुट शोभतो बरा ।</span><span class="rm">Hirejadit mukut shobhato bara |</span></span><span class="ln"><span class="dv">रुणझुणती नूपुरे चरणी घागरिया ॥ २ ॥</span><span class="rm">Runajhunati nupure charani ghagariya || 2 ||</span></span></div>
 <div class="short"><span class="dv">॥ जय देव जय देव ॥</span><span class="rm">|| Jay dev jay dev ||</span></div>
@@ -395,7 +399,7 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
 <div class="short"><span class="dv">॥ जय देव जय देव ॥</span><span class="rm">|| Jay dev jay dev ||</span></div>
 <div class="stanza"><span class="ln"><span class="dv">धन्य वेणुनाद अणुक्षेत्रपाळा ।</span><span class="rm">Dhany venunad anukshetrapala |</span></span><span class="ln"><span class="dv">सुवर्णाची कमळे वनमाळा गळा ।</span><span class="rm">Suvarnachi kamale vanamala gala |</span></span><span class="ln"><span class="dv">राही रखुमाबाई राणीया सकळा ।</span><span class="rm">Rahi rakhumabai raniya sakala |</span></span><span class="ln"><span class="dv">ओवाळिती राजा विठोबा सांवळा ॥ ३ ॥</span><span class="rm">Ovaliti raja vithoba sanvala || 3 ||</span></span></div>
 <div class="short"><span class="dv">॥ जय देव जय देव ॥</span><span class="rm">|| Jay dev jay dev ||</span></div>
-<div class="stanza"><span class="ln"><span class="dv">ओवाळू आरत्या कुरवंड्या yeती ।</span><span class="rm">Ovalu aaratya kuravandya yeti |</span></span><span class="ln"><span class="dv">चंद्रभागेमाजी सोडुनिया देती ।</span><span class="rm">Chandrabhagemaji soduniya deti |</span></span><span class="ln"><span class="dv">दिंड्या पताका वैष्णव नाचती ।</span><span class="rm">Dindya pataka vaishnav nachati |</span></span><span class="ln"><span class="dv">पंढरीचा महिमा वर्णावा किती ॥ ४ ॥</span><span class="rm">Pandharicha mahima varnava kiti || 4 ||</span></span></div>
+<div class="stanza"><span class="ln"><span class="dv">ओवाळू आरत्या कुरवंड्या yeती ।</span><span class="rm">Ovalu aaratya kuravandya yeti |</span></span><span class="ln"><span class="dv">चंद्रभागेमाजी सोडुनिया देती ।</span><span class="rm">Chandrabhagemaji soduniya देती |</span></span><span class="ln"><span class="dv">दिंड्या पताका वैष्णव नाचती ।</span><span class="rm">Dindya pataka vaishnav nachati |</span></span><span class="ln"><span class="dv">पंढरीचा महिमा वर्णावा किती ॥ ४ ॥</span><span class="rm">Pandharicha mahima varnava kiti || 4 ||</span></span></div>
 <div class="short"><span class="dv">॥ जय देव जय देव ॥</span><span class="rm">|| Jay dev jay dev ||</span></div>
 <div class="stanza"><span class="ln"><span class="dv">आषाढी कार्तिकी भक्तजन yeती ।</span><span class="rm">Aashadhi kartiki bhaktajan yeti |</span></span><span class="ln"><span class="dv">चंद्रभागेमाजी स्नाने जे करिती ।</span><span class="rm">Chandrabhagemaji snane je karिती |</span></span><span class="ln"><span class="dv">दर्शनहेळामात्रे तया होय मुक्ती ।</span><span class="rm">Darshanahelamatre taya hoy mukti |</span></span><span class="ln"><span class="dv">केशवासी नामदेव भावे ओवाळिती ॥ ५ ॥</span><span class="rm">Keshavasi namadev bhave ovaliti || 5 ||</span></span></div>
 <div class="short"><span class="dv">॥ जय देव जय देव ॥</span><span class="rm">|| Jay dev jay dev ||</span></div>
@@ -766,56 +770,100 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
     });
   });
 
-  /* --- 5. Mobile & Desktop Robust Auto-Scroll --- */
+  /* --- 5. Mobile & Desktop Robust Auto-Scroll Engine --- */
   var autoScrollBar = document.getElementById('autoScrollBar');
   var scrollTogglePlay = document.getElementById('scrollTogglePlay');
   var scrollSpeedBtn = document.getElementById('scrollSpeedBtn');
   var isScrolling = false;
+  var isTouchInterrupted = false;
   var scrollSpeed = 1;
   var animFrameId = null;
   var lastTimestamp = 0;
   var fractionalScroll = 0;
 
+  function getScrollTop(){
+    return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  }
+
+  function setScrollTop(top){
+    var scroller = document.scrollingElement || document.documentElement || document.body;
+    if(scroller && typeof scroller.scrollTop !== 'undefined'){
+      scroller.scrollTop = top;
+    }
+    window.scrollTo(0, top);
+  }
+
   function autoScrollStep(timestamp){
     if(!isScrolling) return;
-    if(!lastTimestamp) lastTimestamp = timestamp;
+
+    if(!lastTimestamp){
+      lastTimestamp = timestamp;
+    }
     var delta = timestamp - lastTimestamp;
     lastTimestamp = timestamp;
 
-    var pxPerSecond = 28 * scrollSpeed;
-    fractionalScroll += (pxPerSecond * delta) / 1000;
+    if(delta > 100) delta = 100; // prevents sudden page jumping if tab was backgrounded
 
-    if(fractionalScroll >= 1){
-      var movePx = Math.floor(fractionalScroll);
-      window.scrollBy(0, movePx);
-      fractionalScroll -= movePx;
+    if(!isTouchInterrupted){
+      var pxPerSecond = 32 * scrollSpeed;
+      fractionalScroll += (pxPerSecond * delta) / 1000;
+
+      if(fractionalScroll >= 1){
+        var movePx = Math.floor(fractionalScroll);
+        fractionalScroll -= movePx;
+
+        var currentY = getScrollTop();
+        var scroller = document.scrollingElement || document.documentElement || document.body;
+        var maxScroll = Math.max(0, (scroller ? scroller.scrollHeight : document.body.scrollHeight) - window.innerHeight);
+
+        if(currentY >= maxScroll - 2 && maxScroll > 0){
+          stopAutoScroll();
+          return;
+        }
+
+        setScrollTop(currentY + movePx);
+      }
     }
 
-    var scrollElement = document.scrollingElement || document.documentElement || document.body;
-    var maxScroll = scrollElement.scrollHeight - window.innerHeight;
-    if(window.pageYOffset >= maxScroll - 2){
-      stopAutoScroll();
-      return;
-    }
+    animFrameId = requestAnimationFrame(autoScrollStep);
+  }
 
+  function startAutoScroll(){
+    isScrolling = true;
+    isTouchInterrupted = false;
+    lastTimestamp = 0;
+    fractionalScroll = 0;
+    html.classList.add('auto-scrolling'); // forces scroll-behavior: auto !important on mobile
+    scrollTogglePlay.textContent = u() ? '⏸ Pause' : '⏸ थांबवा';
+    if(animFrameId) cancelAnimationFrame(animFrameId);
     animFrameId = requestAnimationFrame(autoScrollStep);
   }
 
   function stopAutoScroll(){
     isScrolling = false;
-    if(animFrameId){ cancelAnimationFrame(animFrameId); animFrameId = null; }
+    isTouchInterrupted = false;
+    if(animFrameId){
+      cancelAnimationFrame(animFrameId);
+      animFrameId = null;
+    }
     lastTimestamp = 0;
     fractionalScroll = 0;
+    html.classList.remove('auto-scrolling');
     scrollTogglePlay.textContent = u() ? '▶ Start' : '▶ सुरू करा';
   }
 
-  function startAutoScroll(){
-    isScrolling = true;
-    lastTimestamp = 0;
-    fractionalScroll = 0;
-    scrollTogglePlay.textContent = u() ? '⏸ Pause' : '⏸ थांबवा';
-    animFrameId = requestAnimationFrame(autoScrollStep);
-  }
+  // Touch listener: pauses scroll while finger is down so devotee can adjust reading position
+  window.addEventListener('touchstart', function(e){
+    if(e.target.closest('#autoScrollBar')) return;
+    if(isScrolling) isTouchInterrupted = true;
+  }, {passive: true});
+
+  window.addEventListener('touchend', function(){
+    if(isScrolling){
+      isTouchInterrupted = false;
+      lastTimestamp = 0;
+    }
+  }, {passive: true});
 
   document.getElementById('autoScrollToggle').addEventListener('click', function(){
     autoScrollBar.classList.toggle('show');
@@ -883,7 +931,7 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
 
   function buildHtml(){
     var c=html.cloneNode(true);
-    c.classList.remove('js'); if(!c.getAttribute('class')){c.removeAttribute('class');}
+    c.classList.remove('js', 'auto-scrolling'); if(!c.getAttribute('class')){c.removeAttribute('class');}
     c.removeAttribute('data-theme'); c.setAttribute('lang','mr');
     var b=c.querySelector('body'); b.classList.remove('reorder','m-en','m-both'); if(!b.getAttribute('class')){b.removeAttribute('class');}
     Array.prototype.forEach.call(c.querySelectorAll('li'),function(li){li.classList.remove('hidden');});
