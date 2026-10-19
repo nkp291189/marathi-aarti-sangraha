@@ -133,12 +133,22 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
 .autoscroll-bar{
   position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
   background:var(--paper); border:1px solid var(--rule); box-shadow:0 6px 20px rgba(0,0,0,.25);
-  border-radius:999px; padding:6px 14px; display:none; align-items:center; gap:10px; z-index:100;
+  border-radius:999px; padding:6px 16px; display:none; align-items:center; gap:10px; z-index:100;
+  max-width:92vw;
 }
 .autoscroll-bar.show{display:flex}
 .autoscroll-bar button{
   font:inherit; font-size:13px; padding:4px 10px; border-radius:999px; border:1px solid var(--rule);
-  background:var(--tint); color:var(--accent); cursor:pointer;
+  background:var(--tint); color:var(--accent); cursor:pointer; white-space:nowrap;
+}
+.slider-wrap{
+  display:flex; align-items:center; gap:6px;
+}
+.slider-wrap input[type="range"]{
+  width:90px; accent-color:var(--accent); cursor:pointer;
+}
+.slider-val{
+  font-size:12px; font-weight:700; color:var(--accent); min-width:32px; text-align:center;
 }
 
 .colophon{margin-top:56px; padding-top:18px; border-top:1px solid var(--rule); text-align:center; color:var(--muted); font-size:14px; line-height:1.7}
@@ -205,10 +215,10 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
     <button type="button" class="tool-btn" id="fontReset">A</button>
     <button type="button" class="tool-btn" id="fontInc">A+</button>
     <span class="tool-label" style="margin-left:12px"><span class="dv">उत्सव क्रम:</span><span class="rm">Presets:</span></span>
-    <button type="button" class="tool-btn" id="presetOrig">मूळ क्रम</button>
-    <button type="button" class="tool-btn" id="presetGanesh">गणेशोत्सव</button>
-    <button type="button" class="tool-btn" id="presetNavratri">नवरात्र</button>
-    <button type="button" class="tool-btn" id="presetDaily">नित्य पूजा</button>
+    <button type="button" class="tool-btn preset-btn" id="presetOrig">मूळ क्रम</button>
+    <button type="button" class="tool-btn preset-btn" id="presetGanesh">गणेशोत्सव</button>
+    <button type="button" class="tool-btn preset-btn" id="presetNavratri">नवरात्र</button>
+    <button type="button" class="tool-btn preset-btn" id="presetDaily">नित्य पूजा</button>
   </div>
 
   <!-- Instant Search Box -->
@@ -262,7 +272,7 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
 <h2><span class="dv">सुखकर्ता दुःखहर्ता</span><span class="rm">Sukhakarta Dukhaharta</span></h2>
 <p class="credit"><span class="dv">रचना : समर्थ रामदास स्वामी</span><span class="rm">Rachana : Samarth Ramadas Svami</span></p>
 <div class="orn" aria-hidden="true"><span>❖</span></div>
-<div class="stanza"><span class="ln"><span class="dv">सुखकर्ता दुःखहर्ता वार्ता विघ्नाची ।</span><span class="rm">Sukhakarta dukhaharta varta vighnachi |</span></span><span class="ln"><span class="dv">नुरवी पुरवी प्रेम कृपा जयाची ।</span><span class="rm">Nuravi puravi prem kripa jayachi |</span></span><span class="ln"><span class="dv">सर्वांगी सुंदर उटी शेंदुराची ।</span><span class="rm">Sarvangi sundar uti shendurachi |</span></span><span class="ln"><span class="dv">कंठी झळके माळ मुक्ताफळांची ॥ १ ॥</span><span class="rm">Kanthi jhalake mal muktaphalanchi || 1 ||</span></span></div>
+<div class="stanza"><span class="ln"><span class="dv">सुखकर्ता दुःखहर्ता वार्ता विघ्नाची ।</span><span class="rm">Sukhakarta dukhaharta varta vighnachi |</span></span><span class="ln"><span class="dv">नुरवी पुरवी प्रेम कृपा जयाची ।</span><span class="rm">Nuravi puravi प्रेम कृपा जयाची ।</span></span><span class="ln"><span class="dv">सर्वांगी सुंदर उटी शेंदुराची ।</span><span class="rm">Sarvangi sundar uti shendurachi |</span></span><span class="ln"><span class="dv">कंठी झळके माळ मुक्ताफळांची ॥ १ ॥</span><span class="rm">Kanthi jhalake mal muktaphalanchi || 1 ||</span></span></div>
 <div class="refrain"><span class="tag"><span class="dv">धृ.</span><span class="rm">Refrain</span></span><span class="ln"><span class="dv">जय देव जय देव जय मंगलमूर्ती ।</span><span class="rm">Jay dev jay dev jay mangalamurti |</span></span><span class="ln"><span class="dv">दर्शनमात्रे मनःकामना पुरती ॥ जय देव जय देव ॥</span><span class="rm">Darshanamatre manahkamana purati || jay dev jay dev ||</span></span></div>
 <div class="stanza"><span class="ln"><span class="dv">रत्नखचित फरा तुज गौरीकुमरा ।</span><span class="rm">Ratnakhachit phara tuj gaurikumara |</span></span><span class="ln"><span class="dv">चंदनाची उटी कुंकुमकेशरा ।</span><span class="rm">Chandanachi uti kunkumakeshara |</span></span><span class="ln"><span class="dv">हिरेजडित मुकुट शोभतो बरा ।</span><span class="rm">Hirejadit mukut shobhato bara |</span></span><span class="ln"><span class="dv">रुणझुणती नूपुरे चरणी घागरिया ॥ २ ॥</span><span class="rm">Runajhunati nupure charani ghagariya || 2 ||</span></span></div>
 <div class="short"><span class="dv">॥ जय देव जय देव ॥</span><span class="rm">|| Jay dev jay dev ||</span></div>
@@ -318,7 +328,7 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
 <div class="short"><span class="dv">॥ जय देवी जय देवी ॥</span><span class="rm">|| Jay devi jay devi ||</span></div>
 <div class="stanza"><span class="ln"><span class="dv">तारा शक्ति अगम्या शिवभजका गौरी ।</span><span class="rm">Tara shakti agamya shivabhajaka gauri |</span></span><span class="ln"><span class="dv">सांख्य म्हणती प्रकृती निर्गुण निर्धारी ।</span><span class="rm">Sankhy mhanati prakriti nirgun nirdhari |</span></span><span class="ln"><span class="dv">गायत्री निजबीजा निगमागम सारी ।</span><span class="rm">Gayatri nijabija nigamagam sari |</span></span><span class="ln"><span class="dv">प्रगटे पद्मावती निजधर्माचारी ॥ ३ ॥</span><span class="rm">Pragate padmavati nijadharmachari || 3 ||</span></span></div>
 <div class="short"><span class="dv">॥ जय देवी जय देवी ॥</span><span class="rm">|| Jay devi jay devi ||</span></div>
-<div class="stanza"><span class="ln"><span class="dv">अमृतभरिते सरिते अघदुरिते वारी ।</span><span class="rm">Amritabharite sarite aghadurite vari |</span></span><span class="ln"><span class="dv">मारी दुर्घट असुरां भवदुस्तर तारी ।</span><span class="rm">Mari durghat asuram bhavadustar tari |</span></span><span class="ln"><span class="dv">वारी मायापटल प्रणमत परिवारी ।</span><span class="rm">Vari mayapatal pranamat parivari |</span></span><span class="ln"><span class="dv">हे रूप चिद्रूप दावी निर्धारी ॥ ४ ॥</span><span class="rm">He rup chidrup davi nirdhari || 4 ||</span></span></div>
+<div class="stanza"><span class="ln"><span class="dv">अमृतभरिते सरिते अघदुरिते वारी ।</span><span class="rm">Amritabharite sarite aghadurite vari |</span></span><span class="ln"><span class="dv">मारी दुर्घट असुरां भवदुस्तर तारी ।</span><span class="rm">Mari durghat asuram bhavadustar tari |</span></span><span class="ln"><span class="dv">वारी मायापटल प्रणमत परिवारी ।</span><span class="rm">Vari mayapatal pranamat parivari |</span></span><span class="ln"><span class="dv">हे रूप चिद्रूप तद्रूप दावी निर्धारी ॥ ४ ॥</span><span class="rm">He rup chidrup tadrup davi nirdhari || 4 ||</span></span></div>
 <div class="short"><span class="dv">॥ जय देवी जय देवी ॥</span><span class="rm">|| Jay devi jay devi ||</span></div>
 <div class="stanza"><span class="ln"><span class="dv">चतुराननें कुश्चित कर्मांच्या ओळी ।</span><span class="rm">Chaturananem kushchit karmanchya oli |</span></span><span class="ln"><span class="dv">लिहिल्या असतील माते माझे निजभाळी ।</span><span class="rm">Lihilya asatil mate majhe nijabhali |</span></span><span class="ln"><span class="dv">पुसोनि चरणातळी पदसुमने क्षाळी ।</span><span class="rm">Pusoni charanatali padasumane kshali |</span></span><span class="ln"><span class="dv">मुक्तेश्वर नागर क्षीरसागरबाळी ॥ ५ ॥</span><span class="rm">Mukteshvar nagar kshirasagarabali || 5 ||</span></span></div>
 <div class="short"><span class="dv">॥ जय देवी जय देवी ॥</span><span class="rm">|| Jay devi jay devi ||</span></div>
@@ -579,7 +589,10 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
 <div class="autoscroll-bar" id="autoScrollBar">
   <span style="font-size:13px; font-weight:600; color:var(--accent)">📜 ऑटो-स्क्रोल:</span>
   <button type="button" id="scrollTogglePlay">▶ सुरू करा</button>
-  <button type="button" id="scrollSpeedBtn">वेग: १×</button>
+  <div class="slider-wrap">
+    <input type="range" id="scrollSpeedSlider" min="0.2" max="3.0" step="0.1" value="1.0" aria-label="स्क्रोल वेग / Scroll speed">
+    <span class="slider-val" id="scrollSpeedVal">१.०×</span>
+  </div>
   <button type="button" id="scrollCloseBtn">✕ बंद</button>
 </div>
 
@@ -735,18 +748,45 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
     fontScale = 1; applyScale();
   });
 
-  /* --- 3. Festival Presets --- */
+  /* --- 3. Festival Presets & Mutual Exclusion --- */
   var PRESETS = {
+    orig: original,
     ganesh: ["sukhakarta", "shendur", "tusukhakarta", "lavthavti", "durge", "karpoor", "ghalin", "pushpanjali", "pandurang", "vitthal", "mahalakshmi", "renuka", "navratri", "gajanan", "dashavatar", "hanuman", "datta", "dnyanraj"],
     navratri: ["durge", "mahalakshmi", "renuka", "navratri", "sukhakarta", "shendur", "karpoor", "ghalin", "pushpanjali", "lavthavti", "gajanan", "pandurang", "vitthal", "tusukhakarta", "dashavatar", "hanuman", "datta", "dnyanraj"],
     daily: ["sukhakarta", "ghalin", "karpoor", "pushpanjali"]
   };
-  document.getElementById('presetOrig').addEventListener('click', function(){ applyOrder(original); del(K_ORDER); });
-  document.getElementById('presetGanesh').addEventListener('click', function(){ applyOrder(PRESETS.ganesh); saveOrder(); });
-  document.getElementById('presetNavratri').addEventListener('click', function(){ applyOrder(PRESETS.navratri); saveOrder(); });
-  document.getElementById('presetDaily').addEventListener('click', function(){ applyOrder(PRESETS.daily); saveOrder(); });
 
-  /* --- 4. Instant Search & Deity Filter Chips --- */
+  var presetBtns = document.querySelectorAll('.preset-btn');
+  function clearPresetHighlights(){
+    presetBtns.forEach(function(btn){ btn.classList.remove('active'); });
+  }
+
+  function activatePreset(name, btnEl){
+    clearPresetHighlights();
+    if(btnEl) btnEl.classList.add('active');
+
+    // Deselect deity filter chips back to "all"
+    chips.forEach(function(c){ c.classList.remove('active'); });
+    var allChip = document.querySelector('.chip[data-tag="all"]');
+    if(allChip) allChip.classList.add('active');
+    activeTag = 'all';
+
+    if(name === 'orig'){
+      applyOrder(original);
+      del(K_ORDER);
+    } else if(PRESETS[name]){
+      applyOrder(PRESETS[name]);
+      saveOrder();
+    }
+    filterAartis();
+  }
+
+  document.getElementById('presetOrig').addEventListener('click', function(){ activatePreset('orig', this); });
+  document.getElementById('presetGanesh').addEventListener('click', function(){ activatePreset('ganesh', this); });
+  document.getElementById('presetNavratri').addEventListener('click', function(){ activatePreset('navratri', this); });
+  document.getElementById('presetDaily').addEventListener('click', function(){ activatePreset('daily', this); });
+
+  /* --- 4. Instant Search & Deity Filter Chips (with Mutual Exclusion) --- */
   var searchInput = document.getElementById('searchInput');
   var activeTag = 'all';
 
@@ -775,21 +815,31 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
       Array.prototype.forEach.call(chips, function(c){ c.classList.remove('active'); });
       chip.classList.add('active');
       activeTag = chip.getAttribute('data-tag');
+
+      // Clear any highlighted festival preset when deity filter is picked
+      clearPresetHighlights();
+
       filterAartis();
     });
   });
 
-  /* --- 5. Mobile & Desktop Robust Auto-Scroll Engine --- */
+  /* --- 5. Mobile & Desktop Robust Auto-Scroll Engine with Granular Slider --- */
   var autoScrollBar = document.getElementById('autoScrollBar');
   var scrollTogglePlay = document.getElementById('scrollTogglePlay');
-  var scrollSpeedBtn = document.getElementById('scrollSpeedBtn');
+  var speedSlider = document.getElementById('scrollSpeedSlider');
+  var speedValEl = document.getElementById('scrollSpeedVal');
   var isScrolling = false;
   var isTouchInterrupted = false;
-  var scrollSpeed = 1;
-  var SPEED_CYCLE = [0.5, 1, 1.5, 2];
+  var scrollSpeed = 1.0;
   var animFrameId = null;
   var lastTimestamp = 0;
   var fractionalScroll = 0;
+
+  function updateSpeedDisplay(){
+    var valStr = Number(scrollSpeed).toFixed(1);
+    var formatted = u() ? valStr + '×' : dn(valStr) + '×';
+    speedValEl.textContent = formatted;
+  }
 
   function getScrollTop(){
     return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
@@ -862,13 +912,10 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
     scrollTogglePlay.textContent = u() ? '▶ Start' : '▶ सुरू करा';
   }
 
-  function updateSpeedLabel(){
-    var spdText = scrollSpeed === 0.5 ? (u() ? '0.5×' : '०.५×')
-                : scrollSpeed === 1 ? (u() ? '1×' : '१×')
-                : scrollSpeed === 1.5 ? (u() ? '1.5×' : '१.५×')
-                : (u() ? '2×' : '२×');
-    scrollSpeedBtn.textContent = (u() ? 'Speed: ' : 'वेग: ') + spdText;
-  }
+  speedSlider.addEventListener('input', function(){
+    scrollSpeed = parseFloat(this.value) || 1.0;
+    updateSpeedDisplay();
+  });
 
   window.addEventListener('touchstart', function(e){
     if(e.target.closest('#autoScrollBar')) return;
@@ -891,16 +938,12 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
     if(isScrolling){ stopAutoScroll(); } else { startAutoScroll(); }
   });
 
-  scrollSpeedBtn.addEventListener('click', function(){
-    var currIdx = SPEED_CYCLE.indexOf(scrollSpeed);
-    scrollSpeed = SPEED_CYCLE[(currIdx + 1) % SPEED_CYCLE.length];
-    updateSpeedLabel();
-  });
-
   document.getElementById('scrollCloseBtn').addEventListener('click', function(){
     stopAutoScroll();
     autoScrollBar.classList.remove('show');
   });
+
+  updateSpeedDisplay();
 
   /* --- 6. Seamless SortableJS Touch & Desktop Reordering --- */
   var sortableInstance = null;
@@ -938,7 +981,7 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
 
   document.getElementById('langBtn').addEventListener('click',function(){
     var order=['mr','en','both']; mode=order[(order.indexOf(mode)+1)%3];
-    put(K_MODE,mode); applyMode(); labels(); updateSpeedLabel();
+    put(K_MODE,mode); applyMode(); labels(); updateSpeedDisplay();
   });
 
   document.getElementById('scrollTopBtn').addEventListener('click', function(){
