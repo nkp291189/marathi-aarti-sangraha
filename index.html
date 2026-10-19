@@ -609,36 +609,49 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
   function del(k){try{localStorage.removeItem(k);}catch(e){}}
 
   var S={
-    reorder:['⇅ क्रम बदला','⇅ Reorder'], done:['✓ पूर्ण','✓ Done'],
-    reset:['मूळ क्रम','Original order'],
-    save:['⬇ माझ्या क्रमासह HTML जतन करा','⬇ Save HTML with my order'],
-    print:['छापा / PDF','Print / PDF'],
-    hint:['⠿ चिन्ह धरून आरतीचा क्रम सहज ओढून बदला. नंतर “माझ्या क्रमासह HTML जतन करा” दाबून ती फाईल इतरांना पाठवा.','Drag by the ⠿ handle to reorder. Then tap “Save HTML with my order” and share that file.'],
-    saved:['फाईल जतन झाली. ही फाईल इतरांना पाठवा.','File saved. Share this file with others.'],
-    dl:['फाईल डाउनलोड झाली. ही फाईल इतरांना पाठवा.','File downloaded. Share this file with others.'],
-    fail:['जतन करता आले नाही. ही फाईल ब्राउझरमध्ये (Chrome/Safari) उघडून पुन्हा प्रयत्न करा.','Could not save. Open this file in Chrome or Safari and try again.'],
-    wakeNormal: ['🔆 स्क्रीन: सामान्य', '🔆 Screen: Normal'],
-    wakeAwake: ['🔆 स्क्रीन: चालू राहील', '🔆 Screen: Awake'],
-    autoScroll: ['📜 ऑटो-स्क्रोल', '📜 Auto-Scroll'],
-    presetOrig: ['मूळ क्रम', 'Original'],
-    presetGanesh: ['गणेशोत्सव', 'Ganeshotsav'],
-    presetNavratri: ['नवरात्र', 'Navratri'],
-    presetDaily: ['नित्य पूजा', 'Daily Puja'],
-    filterAll: ['सर्व (All)', 'All'],
-    filterGanapati: ['गणपती', 'Ganapati'],
-    filterDevi: ['देवी', 'Devi'],
-    filterShiva: ['शंकर', 'Shiva'],
-    filterVitthal: ['विठ्ठल / विष्णू', 'Vitthal / Vishnu'],
-    filterDatta: ['दत्तात्रेय', 'Dattatreya'],
-    filterHanuman: ['हनुमान', 'Hanuman'],
-    filterPrarthana: ['प्रार्थना', 'Prayer'],
-    scrollPlay: ['▶ सुरू करा', '▶ Start'],
-    scrollPause: ['⏸ थांबवा', '⏸ Pause'],
-    scrollClose: ['✕ बंद', '✕ Close']
+    reorder:['⇅ क्रम बदला','⇅ Reorder','⇅ क्रम बदला / Reorder'],
+    done:['✓ पूर्ण','✓ Done','✓ पूर्ण / Done'],
+    reset:['मूळ क्रम','Original order','मूळ क्रम / Original order'],
+    save:['⬇ माझ्या क्रमासह HTML जतन करा','⬇ Save HTML with my order','⬇ जतन करा / Save HTML'],
+    print:['छापा / PDF','Print / PDF','छापा / Print / PDF'],
+    hint:[
+      '⠿ चिन्ह धरून आरतीचा क्रम सहज ओढून बदला. नंतर “माझ्या क्रमासह HTML जतन करा” दाबून ती फाईल इतरांना पाठवा.',
+      'Drag by the ⠿ handle to reorder. Then tap “Save HTML with my order” and share that file.',
+      '⠿ क्रम ओढून बदला / Drag by ⠿ handle to reorder. “जतन करा / Save HTML” दाबून फाईल पाठवा.'
+    ],
+    saved:['फाईल जतन झाली. ही फाईल इतरांना पाठवा.','File saved. Share this file with others.','फाईल जतन झाली / File saved.'],
+    dl:['फाईल डाउनलोड झाली. ही फाईल इतरांना पाठवा.','File downloaded. Share this file with others.','फाईल डाउनलोड झाली / File downloaded.'],
+    fail:['जतन करता आले नाही. ही फाईल ब्राउझरमध्ये (Chrome/Safari) उघडून पुन्हा प्रयत्न करा.','Could not save. Open this file in Chrome or Safari and try again.','जतन करता आले नाही / Could not save.'],
+    wakeNormal: ['🔆 स्क्रीन: सामान्य', '🔆 Screen: Normal', '🔆 स्क्रीन: सामान्य / Screen: Normal'],
+    wakeAwake: ['🔆 स्क्रीन: चालू राहील', '🔆 Screen: Awake', '🔆 स्क्रीन: चालू राहील / Screen: Awake'],
+    autoScroll: ['📜 ऑटो-स्क्रोल', '📜 Auto-Scroll', '📜 ऑटो-स्क्रोल / Auto-Scroll'],
+    presetOrig: ['मूळ क्रम', 'Original order', 'मूळ क्रम / Original'],
+    presetGanesh: ['गणेशोत्सव', 'Ganeshotsav', 'गणेशोत्सव / Ganeshotsav'],
+    presetNavratri: ['नवरात्र', 'Navratri', 'नवरात्र / Navratri'],
+    presetDaily: ['नित्य पूजा', 'Daily Puja', 'नित्य पूजा / Daily Puja'],
+    filterAll: ['सर्व (All)', 'All', 'सर्व (All)'],
+    filterGanapati: ['गणपती', 'Ganapati', 'गणपती / Ganapati'],
+    filterDevi: ['देवी', 'Devi', 'देवी / Devi'],
+    filterShiva: ['शंकर', 'Shiva', 'शंकर / Shiva'],
+    filterVitthal: ['विठ्ठल / विष्णू', 'Vitthal / Vishnu', 'विठ्ठल / Vitthal'],
+    filterDatta: ['दत्तात्रेय', 'Dattatreya', 'दत्तात्रेय / Dattatreya'],
+    filterHanuman: ['हनुमान', 'Hanuman', 'हनुमान / Hanuman'],
+    filterPrarthana: ['प्रार्थना', 'Prayer', 'प्रार्थना / Prayer'],
+    scrollPlay: ['▶ सुरू करा', '▶ Start', '▶ सुरू करा / Start'],
+    scrollPause: ['⏸ थांबवा', '⏸ Pause', '⏸ थांबवा / Pause'],
+    scrollClose: ['✕ बंद', '✕ Close', '✕ बंद / Close']
   };
 
-  var THEMES=[['auto','◐ थीम: स्वयंचलित','◐ Theme: Auto'],['light','☀ थीम: प्रकाश','☀ Theme: Light'],['dark','🌙 थीम: गडद','🌙 Theme: Dark']];
-  var MODES=[['mr','अ/A भाषा: मराठी','अ/A Language: Marathi'],['en','अ/A भाषा: English','अ/A Language: English'],['both','अ/A भाषा: दोन्ही','अ/A Language: Both']];
+  var THEMES=[
+    ['auto','◐ थीम: स्वयंचलित','◐ Theme: Auto','◐ थीम: स्वयंचलित / Auto'],
+    ['light','☀ थीम: प्रकाश','☀ Theme: Light','☀ थीम: प्रकाश / Light'],
+    ['dark','🌙 थीम: गडद','🌙 Theme: Dark','🌙 थीम: गडद / Dark']
+  ];
+  var MODES=[
+    ['mr','अ/A भाषा: मराठी','अ/A Language: Marathi','अ/A भाषा: मराठी'],
+    ['en','अ/A भाषा: English','अ/A Language: English','अ/A Language: English'],
+    ['both','अ/A भाषा: दोन्ही','अ/A Language: Both','अ/A भाषा: दोन्ही / Both']
+  ];
 
   var theme=get(K_THEME); if(theme!=='light'&&theme!=='dark'){theme='auto';}
   var mode=get(K_MODE); if(mode!=='en'&&mode!=='both'){mode='mr';}
@@ -646,7 +659,7 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
   if(isNaN(fontScale) || fontScale < 0.8 || fontScale > 1.6){ fontScale = 1; }
 
   var hintKey='hint';
-  function u(){return mode==='en'?1:0;}
+  function u(){return mode==='en'?1:mode==='both'?2:0;}
   function idx(arr,key){for(var i=0;i<arr.length;i++){if(arr[i][0]===key){return arr[i];}}return arr[0];}
 
   var toc=document.querySelector('.toc'), wrap=document.querySelector('.wrap'), foot=document.querySelector('.colophon');
@@ -660,8 +673,9 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
     document.getElementById('themeBtn').textContent=idx(THEMES,theme)[1+i];
     document.getElementById('langBtn').textContent=idx(MODES,mode)[1+i];
     hintEl.textContent=S[hintKey][i];
+
     var wakeBtn = document.getElementById('wakeLockBtn');
-    if(wakeBtn) wakeBtn.textContent = (typeof wakeLock !== 'undefined' && wakeLock !== null) ? S.wakeAwake[i] : S.wakeNormal[i];
+    if(wakeBtn) wakeBtn.textContent = (wakeLock !== null) ? S.wakeAwake[i] : S.wakeNormal[i];
 
     var autoScrollBtn = document.getElementById('autoScrollToggle');
     if(autoScrollBtn) autoScrollBtn.textContent = S.autoScroll[i];
@@ -684,10 +698,10 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
     }
 
     var togglePlayBtn = document.getElementById('scrollTogglePlay');
-    if(togglePlayBtn) togglePlayBtn.textContent = (typeof isScrolling !== 'undefined' && isScrolling) ? S.scrollPause[i] : S.scrollPlay[i];
+    if(togglePlayBtn) togglePlayBtn.textContent = isScrolling ? S.scrollPause[i] : S.scrollPlay[i];
 
     var scrollCloseBtn = document.getElementById('scrollCloseBtn');
-    if(scrollCloseBtn) scrollCloseBtn.textContent = S.scrollClose[i];    
+    if(scrollCloseBtn) scrollCloseBtn.textContent = S.scrollClose[i];
   }
 
   function applyTheme(){
