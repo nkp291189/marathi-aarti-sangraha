@@ -68,6 +68,7 @@ body{
 .search-box input:focus{border-color:var(--accent)}
 .chip-bar{display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin:8px 0 16px}
 .chip{
+  font:inherit;
   font-size:13px; padding:4px 12px; border-radius:999px; border:1px solid var(--rule);
   background:var(--paper); color:var(--muted); cursor:pointer;
 }
@@ -133,19 +134,19 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
 .autoscroll-bar{
   position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
   background:var(--paper); border:1px solid var(--rule); box-shadow:0 6px 20px rgba(0,0,0,.25);
-  border-radius:999px; padding:6px 16px; display:none; align-items:center; gap:10px; z-index:100;
-  max-width:92vw;
+  border-radius:999px; padding:6px 12px; display:none; align-items:center; gap:6px; z-index:100;
+  max-width:96vw; width:max-content;
 }
 .autoscroll-bar.show{display:flex}
 .autoscroll-bar button{
-  font:inherit; font-size:13px; padding:4px 10px; border-radius:999px; border:1px solid var(--rule);
-  background:var(--tint); color:var(--accent); cursor:pointer; white-space:nowrap;
+  font:inherit; font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid var(--rule);
+  background:var(--tint); color:var(--accent); cursor:pointer; white-space:nowrap; flex-shrink:0;
 }
 .slider-wrap{
-  display:flex; align-items:center; gap:6px;
+  display:flex; align-items:center; gap:4px; flex-shrink:1;
 }
 .slider-wrap input[type="range"]{
-  width:90px; accent-color:var(--accent); cursor:pointer;
+  width:68px; accent-color:var(--accent); cursor:pointer;
 }
 .slider-val{
   font-size:12px; font-weight:700; color:var(--accent); min-width:32px; text-align:center;
