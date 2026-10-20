@@ -134,24 +134,29 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
 .autoscroll-bar{
   position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
   background:var(--paper); border:1px solid var(--rule); box-shadow:0 6px 20px rgba(0,0,0,.25);
-  border-radius:999px; padding:6px 12px; display:none; align-items:center; gap:6px; z-index:100;
-  max-width:96vw; width:max-content;
+  border-radius:18px; padding:8px 14px; display:none; flex-direction:column; align-items:center; gap:6px; z-index:100;
+  width:min(360px, 94vw);
 }
 .autoscroll-bar.show{display:flex}
+.autoscroll-title{
+  font-size:13px; font-weight:600; color:var(--accent); text-align:center; line-height:1.2;
+}
+.autoscroll-row{
+  display:flex; align-items:center; justify-content:space-between; gap:8px; width:100%;
+}
 .autoscroll-bar button{
-  font:inherit; font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid var(--rule);
+  font:inherit; font-size:12px; padding:5px 10px; border-radius:999px; border:1px solid var(--rule);
   background:var(--tint); color:var(--accent); cursor:pointer; white-space:nowrap; flex-shrink:0;
 }
 .slider-wrap{
-  display:flex; align-items:center; gap:4px; flex-shrink:1;
+  display:flex; align-items:center; gap:6px; flex:1; min-width:0;
 }
 .slider-wrap input[type="range"]{
-  width:68px; accent-color:var(--accent); cursor:pointer;
+  flex:1; width:100%; min-width:70px; accent-color:var(--accent); cursor:pointer;
 }
 .slider-val{
-  font-size:12px; font-weight:700; color:var(--accent); min-width:32px; text-align:center;
+  font-size:12px; font-weight:700; color:var(--accent); min-width:32px; text-align:center; flex-shrink:0;
 }
-
 .colophon{margin-top:56px; padding-top:18px; border-top:1px solid var(--rule); text-align:center; color:var(--muted); font-size:14px; line-height:1.7}
 
 /* Language Switcher */
@@ -588,13 +593,17 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
 
 <!-- Hands-Free Auto-Scroll Dock -->
 <div class="autoscroll-bar" id="autoScrollBar">
-  <span style="font-size:13px; font-weight:600; color:var(--accent)"><span class="dv">📜 ऑटो-स्क्रोल:</span><span class="rm">📜 Auto-Scroll:</span></span>
-  <button type="button" id="scrollTogglePlay">▶ सुरू करा</button>
-  <div class="slider-wrap">
-    <input type="range" id="scrollSpeedSlider" min="0.2" max="3.0" step="0.1" value="1.0" aria-label="स्क्रोल वेग / Scroll speed">
-    <span class="slider-val" id="scrollSpeedVal">१.०×</span>
+  <div class="autoscroll-title">
+    <span class="dv">📜 ऑटो-स्क्रोल:</span><span class="rm">📜 Auto-Scroll:</span>
   </div>
-  <button type="button" id="scrollCloseBtn">✕ बंद</button>
+  <div class="autoscroll-row">
+    <button type="button" id="scrollTogglePlay">▶ सुरू करा</button>
+    <div class="slider-wrap">
+      <input type="range" id="scrollSpeedSlider" min="0.2" max="3.0" step="0.1" value="1.0" aria-label="स्क्रोल वेग / Scroll speed">
+      <span class="slider-val" id="scrollSpeedVal">१.०×</span>
+    </div>
+    <button type="button" id="scrollCloseBtn">✕ बंद</button>
+  </div>
 </div>
 
 <script type="application/json" id="baseorder">["sukhakarta", "durge", "lavthavti", "mahalakshmi", "renuka", "navratri", "gajanan", "pandurang", "vitthal", "shendur", "tusukhakarta", "dashavatar", "hanuman", "datta", "dnyanraj", "karpoor", "ghalin", "pushpanjali"]</script>
