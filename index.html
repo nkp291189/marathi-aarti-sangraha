@@ -97,7 +97,7 @@ body{
 .sortable-chosen{background:var(--paper)}
 
 /* TOC */
-.toc{list-style:none; margin:16px 0 0; padding:0}
+.toc{list-style:none; margin:16px auto 0; padding:0; max-width:600px; width:100%}
 .toc li{border-bottom:1px dotted var(--rule); display:flex; align-items:center}
 .toc li.hidden{display:none !important}
 .toc li a{flex:1; min-width:0; display:grid; grid-template-columns:2.2em 1fr; column-gap:6px; padding:10px 4px; color:inherit; text-decoration:none}
@@ -106,14 +106,17 @@ body{
 .toc .d{color:var(--muted); font-size:14px; line-height:1.4}
 
 /* Aarti Sections */
-.aarti{padding-top:44px; margin-top:36px; border-top:1px solid var(--rule)}
+.aarti{
+  padding-top:44px; margin:36px auto 0; border-top:1px solid var(--rule);
+  text-align:center; width:100%;
+}
 .aarti.hidden{display:none !important}
-.deity{text-align:center; color:var(--muted); font-size:16px; margin:0}
-h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; margin:4px 0 2px; font-weight:700}
-.credit{text-align:center; color:var(--muted); font-size:15px; margin:0}
-.orn{text-align:center; color:var(--gold); margin:12px 0 18px; font-size:18px}
+.deity{text-align:center; color:var(--muted); font-size:16px; margin:0 auto}
+h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; margin:4px auto 2px; font-weight:700}
+.credit{text-align:center; color:var(--muted); font-size:15px; margin:0 auto}
+.orn{text-align:center; color:var(--gold); margin:12px auto 18px; font-size:18px}
 .orn span::before,.orn span::after{content:""; display:inline-block; width:64px; height:1px; background:var(--rule); vertical-align:middle; margin:0 12px}
-.stanza,.refrain{display:block; text-align:center; margin:0 auto 6px; break-inside:avoid; page-break-inside:avoid}
+.stanza,.refrain{display:block; text-align:center; margin:0 auto 6px; width:100%; max-width:620px; break-inside:avoid; page-break-inside:avoid}
 .stanza .ln,.refrain .ln{display:block}
 .refrain{background:var(--tint); border-radius:12px; padding:10px 14px; margin:12px auto; font-weight:600; color:var(--accent)}
 .refrain .tag{display:block; font-size:13px; color:var(--gold); font-weight:600; line-height:1.2; margin-bottom:2px}
@@ -157,7 +160,7 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
 .slider-val{
   font-size:12px; font-weight:700; color:var(--accent); min-width:32px; text-align:center; flex-shrink:0;
 }
-.colophon{margin-top:56px; padding-top:18px; border-top:1px solid var(--rule); text-align:center; color:var(--muted); font-size:14px; line-height:1.7}
+.colophon{margin:56px auto 0; padding-top:18px; border-top:1px solid var(--rule); text-align:center; color:var(--muted); font-size:14px; line-height:1.7; max-width:600px; width:100%}
 
 /* Language Switcher */
 .rm{display:none; font-family:Georgia,"Times New Roman",Times,serif}
@@ -172,25 +175,25 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
 @page{ size:A4; margin:12mm 14mm 12mm }
 @media print{
   body{--bg:#fff; --paper:#fff; --ink:#2b1a12; --muted:#7a5a47; --accent:#9c2f12; --gold:#c18a1b; --rule:#e6d3a8; --tint:#fff1d6;
-       background:#fff; color:#2b1a12; font-size:12.5pt; line-height:1.62}
-  .wrap{max-width:none; padding:0}
-  .cover{padding:6mm 0 8mm; border:0; page-break-after:always}
-  .om{font-size:34pt}
-  .cover h1{font-size:26pt; margin:2px 0 2px}
-  .cover .sub{font-size:10.5pt}
-  .toc-title{margin:8px 0 0}
-  .toc{margin-top:4px}
+       background:#fff; color:#2b1a12; font-size:12.5pt; line-height:1.62; text-align:center}
+  .wrap{max-width:100%; margin:0 auto; padding:0}
+  .cover{padding:6mm 0 8mm; border:0; page-break-after:always; text-align:center}
+  .om{font-size:34pt; text-align:center}
+  .cover h1{font-size:26pt; margin:2px auto; text-align:center}
+  .cover .sub{font-size:10.5pt; text-align:center}
+  .toc-title{margin:8px auto 0; text-align:center}
+  .toc{margin:4px auto 0; max-width:90%}
   .toc li{break-inside:avoid}
   .toc li a{padding:1px 4px; color:#2b1a12}
   .toc .t{font-size:10.5pt; line-height:1.25}
   .toc .d{font-size:8.5pt; line-height:1.15}
-  .aarti{page-break-before:always; margin:0; padding-top:0; border:0}
+  .aarti{page-break-before:always; margin:0 auto; padding-top:0; border:0; text-align:center; width:100%}
   .aarti.flow{page-break-before:auto; margin-top:10mm}
-  h2{font-size:22pt}
-  .stanza{margin-top:7px}
-  .refrain{margin:7px auto; padding:7px 12px}
-  .short{margin:0 0 7px}
-  .colophon{break-inside:avoid}
+  h2{font-size:22pt; text-align:center; margin:0 auto}
+  .stanza{margin:7px auto 0; text-align:center; width:100%}
+  .refrain{margin:7px auto; padding:7px 12px; text-align:center; width:100%}
+  .short{margin:0 auto 7px; text-align:center}
+  .colophon{break-inside:avoid; text-align:center; margin:10mm auto 0}
   .fab-dock, .autoscroll-bar, .ctrl, .hint, .drag-handle, .tool-group, .search-box, .chip-bar{display:none !important}
   .totop{font-size:9pt; margin:0 0 2mm}
 }
