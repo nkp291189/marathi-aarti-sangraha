@@ -176,7 +176,13 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
 @media print{
   body{--bg:#fff; --paper:#fff; --ink:#2b1a12; --muted:#7a5a47; --accent:#9c2f12; --gold:#c18a1b; --rule:#e6d3a8; --tint:#fff1d6;
        background:#fff; color:#2b1a12; font-size:12.5pt; line-height:1.62; text-align:center}
-  .wrap{max-width:100%; margin:0 auto; padding:0}
+  .wrap{
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: static !important;
+    transform: none !important;
+  }
   .cover{padding:6mm 0 8mm; border:0; page-break-after:always; text-align:center}
   .om{font-size:34pt; text-align:center}
   .cover h1{font-size:26pt; margin:2px auto; text-align:center}
@@ -187,8 +193,24 @@ h2{text-align:center; color:var(--accent); font-size:31px; line-height:1.45; mar
   .toc li a{padding:1px 4px; color:#2b1a12}
   .toc .t{font-size:10.5pt; line-height:1.25}
   .toc .d{font-size:8.5pt; line-height:1.15}
-  .aarti{page-break-before:always; margin:0 auto; padding-top:0; border:0; text-align:center; width:100%}
-  .aarti.flow{page-break-before:auto; margin-top:10mm}
+  html, body{
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .aarti{
+    break-inside: avoid;
+    page-break-inside: avoid;
+    break-before: page;
+    page-break-before: always;
+    margin: 0;
+    padding-top: 4mm;
+    border: 0;
+  }
+  .aarti.flow{
+    break-before: auto;
+    page-break-before: auto;
+    margin-top: 10mm;
+  }
   h2{font-size:22pt; text-align:center; margin:0 auto}
   .stanza{margin:7px auto 0; text-align:center; width:100%}
   .refrain{margin:7px auto; padding:7px 12px; text-align:center; width:100%}
